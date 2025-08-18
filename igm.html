@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apakah Tuhan Seorang Matematikawan? | Eksplorasi Kosmik</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = { tex: { tags: 'ams', inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cosmic-deep: #0a0c18;
+            --galaxy-purple: #1d1135;
+            --nebula-blue: #0b3d91;
+            --quantum-cyan: #00f5f7;
+            --starlight-yellow: #ffd700;
+            --supernova-pink: #ff00d4;
+            --math-white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: radial-gradient(ellipse at center, var(--cosmic-deep), var(--galaxy-purple));
+            color: var(--math-white);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+            background-attachment: fixed;
+            max-width: 100vw;
+        }
+
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(27, 39, 107, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(155, 39, 176, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 50% 20%, rgba(11, 61, 145, 0.5) 0%, transparent 40%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(13, 18, 40, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--quantum-cyan), var(--supernova-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--quantum-cyan);
+            animation: pulse 3s infinite alternate;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--math-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0.7rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--glass-bg);
+            box-shadow: 0 0 10px rgba(0, 245, 247, 0.3);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--quantum-cyan);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        #theme-toggle {
+            background: none;
+            border: 1px solid var(--quantum-cyan);
+            color: var(--quantum-cyan);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 0 8px rgba(0, 245, 247, 0.3);
+        }
+
+        #theme-toggle:hover {
+            transform: rotate(30deg) scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 245, 247, 0.6);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--math-white);
+            transition: var(--transition);
+        }
+
+        .hamburger:hover {
+            color: var(--quantum-cyan);
+        }
+
+        main {
+            position: relative;
+            z-index: 10;
+            padding: 7rem 1.5rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--quantum-cyan), var(--supernova-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            height: 4px;
+            width: 120px;
+            background: var(--quantum-cyan);
+            border-radius: 10px;
+        }
+
+        .section-header p {
+            max-width: 800px;
+            margin: 1rem auto 0;
+            font-size: 1.1rem;
+            color: var(--math-white);
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(15, 22, 50, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(100, 100, 255, 0.1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--quantum-cyan), var(--supernova-pink));
+        }
+
+        section:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 245, 247, 0.2);
+        }
+
+        section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--quantum-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        section h3 i {
+            color: var(--supernova-pink);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .text-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .visual-content {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            border: 1px solid rgba(100, 100, 255, 0.2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .visual-content:hover {
+            transform: scale(1.02);
+        }
+
+        .visual-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .equation-card {
+            background: rgba(20, 30, 70, 0.6);
+            border: 1px solid var(--quantum-cyan);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 245, 247, 0.2);
+        }
+
+        .equation-card h4 {
+            color: var(--starlight-yellow);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .equation-card .equation {
+            font-size: 1.2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .equation-card .explanation {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--math-white);
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--quantum-cyan), var(--supernova-pink));
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            background: rgba(15, 22, 50, 0.8);
+            border: 1px solid var(--quantum-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--quantum-cyan);
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 500;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 0 12px rgba(0, 245, 247, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--quantum-cyan);
+            color: var(--cosmic-deep);
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(0, 245, 247, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 12px var(--quantum-cyan); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 4rem;
+            background: rgba(10, 15, 35, 0.7);
+            border-top: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+        }
+
+        footer p {
+            font-size: 1rem;
+            color: var(--math-white);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .social-links a {
+            color: var(--math-white);
+            font-size: 1.4rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--quantum-cyan);
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 1100px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .visual-content {
+                order: -1;
+                max-width: 600px;
+                margin: 0 auto 1.5rem;
+                height: auto;
+            }
+
+            section {
+                padding: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1.5rem;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 22, 50, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1.2rem;
+                gap: 0.7rem;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            main {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+                margin: 3rem 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            section h3 {
+                font-size: 1.6rem;
+            }
+
+            .equation-card .equation {
+                font-size: 1.05rem;
+                padding: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            section h3 {
+                font-size: 1.4rem;
+            }
+
+            .text-content p {
+                font-size: 1rem;
+            }
+
+            .equation-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg"></div>
+    <div class="progress-bar"></div>
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-infinity logo-icon"></i>
+            <h1>Apakah Tuhan Seorang Matematikawan?</h1>
+        </div>
+        
+        <nav>
+            <ul id="nav-links">
+                <li><a href="#intro" class="active"><i class="fas fa-star"></i> Pendahuluan</a></li>
+                <li><a href="#phys"><i class="fas fa-atom"></i> Hukum Fisika</a></li>
+                <li><a href="#godel"><i class="fas fa-brain"></i> Gödel & Turing</a></li>
+                <li><a href="#fine"><i class="fas fa-universe"></i> Penyetelan Halus</a></li>
+                <li><a href="#qg"><i class="fas fa-grav"></i> Gravitasi Kuantum</a></li>
+                <li><a href="#chaos"><i class="fas fa-cogs"></i> Kekacauan & Bilangan Prima</a></li>
+            </ul>
+        </nav>
+        
+        <div class="controls">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <span class="hamburger" onclick="document.getElementById('nav-links').classList.toggle('show')">
+                <i class="fas fa-bars"></i>
+            </span>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <h2>Apakah Tuhan Seorang Matematikawan?</h2>
+            <p>Eksplorasi kosmik tentang matematika sebagai bahasa fundamental realitas</p>
+        </div>
+
+        <section id="intro">
+            <h3><i class="fas fa-star"></i> Pendahuluan - Keajaiban Wigner</h3>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>Pada tahun 1960, Eugene Wigner menulis esai terkenal "Ketidaksanggupan Matematika yang Tak Masuk Akal dalam Ilmu Pengetahuan Alam", yang mengajukan pertanyaan mendasar: Mengapa konsep matematika abstrak begitu sempurna memetakan realitas fisik? Keselarasan yang tampak telah ditetapkan sebelumnya antara struktur matematika dan alam semesta fisik ini menunjukkan hubungan mendalam yang melampaui utilitas semata.</p>
+                    
+                    <p>Pertanyaan "Apakah Tuhan Seorang Matematikawan?" bukan hanya teologis - ini menyelidiki sifat fundamental realitas. Jika alam semesta adalah banjir data, matematika adalah algoritma kompresi yang mengekstrak pola bermakna. Tetapi siapa yang menulis algoritma ini? Apakah kosmos datang dengan perpustakaan persamaan Platonis, atau kita menemukannya melalui kemampuan kognitif kita?</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-calculator"></i> Gravitasi Universal Newton</h4>
+                        <div class="equation">
+                            \[ F = G\frac{m_1 m_2}{r^2} \]
+                        </div>
+                        <p class="explanation">Persamaan elegan ini mengatur segala hal mulai dari orbit planet hingga tarikan elektrostatis antar partikel, menunjukkan penerapan universal matematika. Hukum kuadrat terbalik muncul dalam konteks beragam seperti gravitasi, elektromagnetisme, dan propagasi cahaya.</p>
+                    </div>
+                    
+                    <p>Penelitian terbaru dalam ilmu kognitif menunjukkan bahwa intuisi matematika mungkin merupakan adaptasi evolusioner. Leluhur kita yang dapat mengenali pola - perubahan musim, migrasi hewan, hubungan geometris - memiliki keunggulan bertahan hidup. Pengenalan pola ini berevolusi menjadi penalaran matematika abstrak.</p>
+                    
+                    <p>Keajaibannya bukan hanya bahwa matematika efektif, tetapi bahwa ia sangat efektif - efektif sampai tingkat yang melampaui penjelasan evolusioner atau utilitarian. Persamaan diferensial yang sama yang menggambarkan dinamika fluida juga memodelkan fluktuasi pasar saham. Teori grup yang sama yang mengklasifikasikan struktur kristal juga mengatur fisika partikel.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-compress-alt"></i> Kompresi Algoritmik</h4>
+                        <div class="equation">
+                            \[ \text{Kompleksitas} \propto \frac{\text{Data}}{\text{Informasi}} \]
+                        </div>
+                        <p class="explanation">Efisiensi representasi matematis menunjukkan kesederhanaan yang mendasari struktur alam. Hukum fisika sangat dapat dikompresi menjadi ekspresi matematis.</p>
+                    </div>
+                    
+                    <p>Eksplorasi ini mengkaji hubungan mendalam antara matematika dan realitas fisik dari berbagai perspektif, mengungkap kosmos di mana persamaan menghidupkan data dan data membentuk geometri realitas. Kita akan menjelajahi fondasi matematika fisika, batas komputasi, penyetelan halus kosmik, dan koneksi misterius antara gravitasi kuantum dan teori bilangan.</p>
+                </div>
+                
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1200&q=80" alt="Galaksi kosmik">
+                </div>
+            </div>
+        </section>
+
+        <section id="phys">
+            <h3><i class="fas fa-atom"></i> Hukum Fisika sebagai Objek Matematika</h3>
+            <div class="content-grid">
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?auto=format&fit=crop&w=1200&q=80" alt="Persamaan Einstein">
+                </div>
+                
+                <div class="text-content">
+                    <p>Hukum fisika tidak hanya dijelaskan oleh matematika - mereka <em>adalah</em> objek matematika. Pertimbangkan persamaan medan Einstein, yang menggambarkan gravitasi sebagai kelengkungan ruangwaktu. Persamaan ini muncul secara alami dari kerangka kerja matematika geometri diferensial.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-space-shuttle"></i> Persamaan Medan Einstein</h4>
+                        <div class="equation">
+                            \[ R_{\mu\nu} - \tfrac{1}{2}Rg_{\mu\nu} = 8\pi T_{\mu\nu} \]
+                        </div>
+                        <p class="explanation">Ruangwaktu didefinisikan sebagai manifold halus empat dimensi dengan metrik Lorentzian. Metrik tidak terpisah dari manifold - ia <em>adalah</em> geometri manifold itu sendiri. Perspektif geometris ini mengungkapkan gravitasi bukan sebagai gaya tetapi sebagai kelengkungan dalam ruangwaktu itu sendiri.</p>
+                    </div>
+                    
+                    <p>Prinsip aksi melarutkan batas antara proses fisik dan masalah ekstremisasi matematika. Jalur elektron meminimalkan Lagrangian Dirac. Gerakan fisik adalah teorema dalam kalkulus variasi. Alam semesta tampaknya memecahkan masalah optimasi di setiap skala.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-project-diagram"></i> Persamaan Dirac</h4>
+                        <div class="equation">
+                            \[ (i\gamma^\mu\partial_\mu - m)\psi = 0 \]
+                        </div>
+                        <p class="explanation">Menjelaskan perilaku fermion melalui medan spinor dalam mekanika kuantum relativistik. Persamaan ini memprediksikan antimateri bertahun-tahun sebelum penemuannya secara eksperimental, menunjukkan kekuatan prediktif matematika.</p>
+                    </div>
+                    
+                    <p>Fisika teoretis modern mengungkapkan bahwa gaya fundamental sesuai dengan grup simetri: U(1) untuk elektromagnetisme, SU(2) untuk gaya lemah, SU(3) untuk gaya kuat. Lagrangian Model Standar pada dasarnya adalah ekspresi matematis dari simetri-simetri ini.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-project-diagram"></i> Lagrangian Model Standar</h4>
+                        <div class="equation">
+                            \[ \mathcal{L} = -\frac{1}{4} F_{\mu\nu}^a F^{a\mu\nu} + i\bar{\psi}\gamma^\mu D_\mu\psi + |D_\mu\phi|^2 - V(\phi) \]
+                        </div>
+                        <p class="explanation">Ekspresi matematis ringkas ini mengkodekan semua partikel elementer yang diketahui dan interaksinya kecuali gravitasi. Ini mewakili salah satu pencapaian intelektual terbesar umat manusia.</p>
+                    </div>
+                    
+                    <p>Keefektifan matematika yang tidak masuk akal menemukan penjelasan sebagian dalam kebutuhan aksi polinomial untuk renormalisasi, yang pada gilirannya penting untuk kekuatan prediktif. Kita menghuni subset alam semesta yang mungkin yang hukumnya dapat diekspresikan sebagai aksi polinomial karena hanya alam semesta seperti itu yang mengandung fisikawan yang mampu mengajukan pertanyaan.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-project-diagram"></i> Teorema Noether</h4>
+                        <div class="equation">
+                            \[ \delta S = 0 \quad \Rightarrow \quad \partial_\mu J^\mu_a = 0 \]
+                        </div>
+                        <p class="explanation">Menghubungkan simetri kontinu dengan arus kekekalan, memberlakukan kekakuan matematika pada hukum fisika. Hubungan fundamental ini menjelaskan mengapa hukum kekekalan muncul dari prinsip simetri.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="godel">
+            <h3><i class="fas fa-brain"></i> Batas Gödel & Turing dalam Fisika</h3>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>Teorema ketidaklengkapan Gödel dan masalah pemberhentian Turing mengungkapkan batasan mendalam dalam sistem formal. Batasan ini meluas ke fisika, membatasi apa yang dapat kita ketahui tentang alam semesta. Kurt Gödel membuktikan bahwa sistem formal yang konsisten apa pun yang cukup kaya untuk mengkodekan aritmetika tidak lengkap: ada pernyataan benar yang tidak dapat dibuktikan dalam sistem.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-laptop-code"></i> Masalah Pemberhentian Kuantum</h4>
+                        <div class="equation">
+                            \[ H = -\sum_{\langle ij\rangle} \left( \sigma^x_i\sigma^x_j + \sigma^y_i\sigma^y_j \right) + \sum_i h_i(\vec{\theta})\sigma^z_i \]
+                        </div>
+                        <p class="explanation">Hamiltonian kuantum yang dibangun sehingga celah energi keadaan dasarnya lenyap jika dan hanya jika mesin Turing berhenti, menunjukkan ketidakpastian fisik. Ini berarti sifat fisik tertentu pada dasarnya tidak dapat dihitung.</p>
+                    </div>
+                    
+                    <p>Aksiomatisasi standar mekanika kuantum tidak lengkap dalam pengertian Gödel. Ada pernyataan tentang hasil pengukuran yang benar dalam beberapa model kuantum dan salah dalam yang lain. Ini ditunjukkan pada tahun 2024 menggunakan teknik pemaksaan dari teori himpunan, mengungkapkan bahwa alam semesta matematika kita bercabang menjadi model yang tidak isomorfik.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-infinity"></i> Ketidaklengkapan Gödel</h4>
+                        <div class="equation">
+                            \[ \exists G \, (G \leftrightarrow \neg \text{Prov}(\ulcorner G \urcorner) \]
+                        </div>
+                        <p class="explanation">Secara formally menyatakan bahwa dalam sistem formal yang konsisten yang mampu melakukan aritmetika, ada pernyataan yang benar tetapi tidak dapat dibuktikan dalam sistem. Ini berlaku untuk teori fisika kita juga.</p>
+                    </div>
+                    
+                    <p>Mekanika kuantum menyajikan batasannya sendiri melalui prinsip ketidakpastian. Batas fundamental ini menunjukkan kita tidak dapat mengetahui secara bersamaan posisi dan momentum dengan presisi sewenang-wenang, menetapkan batas matematis untuk pengetahuan.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-question-circle"></i> Prinsip Ketidakpastian Heisenberg</h4>
+                        <div class="equation">
+                            \[ \Delta x \Delta p \geq \frac{\hbar}{2} \]
+                        </div>
+                        <p class="explanation">Ketidaksamaan ini menetapkan pertukaran fundamental antara presisi pengukuran komplementer dalam mekanika kuantum. Ini mewakili batasan inheren dalam apa yang dapat kita ketahui tentang sistem kuantum.</p>
+                    </div>
+                    
+                    <p>Apakah ketidaklengkapan ini merusak realitas fungsi gelombang? Belum tentu. Ketidaklengkapannya ada dalam <em>teori</em>, bukan di <em>dunia</em>. Dunia mungkin pasti sempurna, sementara deskripsi matematis terbaik kita tentangnya tetap selamanya parsial. Namun batas antara teori dan dunia itu sendiri adalah medan perang filosofis.</p>
+                </div>
+                
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?auto=format&fit=crop&w=1200&q=80" alt="Komputasi kuantum">
+                </div>
+            </div>
+        </section>
+
+        <section id="fine">
+            <h3><i class="fas fa-universe"></i> Penyetelan Halus dan Multiverse</h3>
+            <div class="content-grid">
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1200&q=80" alt="Konsep multiverse">
+                </div>
+                
+                <div class="text-content">
+                    <p>Konstanta kosmologis Λ menyajikan kasus penyetelan halus paling ekstrem dalam fisika. Data Planck 2023 menempatkan nilai tanpa dimensinya sekitar 1.1 × 10⁻¹²³ dalam satuan Planck. Probabilitas nilai kecil tak terhingga ini terjadi secara acak sangat kecil - sekitar e^{-10^{123}}.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-balance-scale"></i> Distribusi Probabilitas</h4>
+                        <div class="equation">
+                            \[ P(\Lambda | \text{obs}) \propto P(\text{obs} | \Lambda) P(\Lambda) \]
+                        </div>
+                        <p class="explanation">Hipotesis multiverse mengusulkan bahwa ketidakmungkinan Λ menguap dalam ansambel alam semesta saku, dengan efek seleksi menjelaskan pengamatan kita. Prinsip antropik ini menyarankan kita mengamati nilai ini karena memungkinkan kehidupan.</p>
+                    </div>
+                    
+                    <p>Lanskap multiverse muncul secara alami dari teori string, dengan perkiraan 10²⁷²⁰⁰⁰ kompaktifikasi Calabi-Yau berbeda. Setiap vakum sesuai dengan minimum lokal dari superpotensial. Keluasan lanskap ini memberikan banyak kesempatan untuk seleksi antropik.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-cube"></i> Vakua Teori String</h4>
+                        <div class="equation">
+                            \[ N_{\text{vac}} = \int_{\mathcal M} \frac{\Omega \wedge \bar\Omega}{(2\pi i)^n} e^{-K} \]
+                        </div>
+                        <p class="explanation">Menghitung jumlah kompaktifikasi fluks berbeda dalam teori string. Setiap keadaan vakum sesuai dengan alam semesta yang mungkin dengan konstanta fisika yang berbeda.</p>
+                    </div>
+                    
+                    <p>Penyetelan halus melampaui konstanta kosmologis. Pertimbangkan perbedaan massa neutron-proton. Jika perbedaan ini sedikit lebih kecil, proton akan meluruh menjadi neutron, membuat atom tidak stabil. Jika lebih besar, semua hidrogen akan menyatu menjadi helium segera setelah Big Bang, tidak meninggalkan bahan bakar untuk bintang.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-atom"></i> Perbedaan Massa Neutron-Proton</h4>
+                        <div class="equation">
+                            \[ \Delta m = m_n - m_p \approx 1.293 \, \text{MeV}/c^2 \]
+                        </div>
+                        <p class="explanation">Perbedaan massa yang tepat ini memungkinkan atom stabil dan fusi nuklir di bintang. Variasi hanya 2% akan membuat kehidupan berbasis karbon tidak mungkin.</p>
+                    </div>
+                    
+                    <p>Kritikus berpendapat multiverse tidak dapat difalsifikasi. Pembaruan Tegmark 2024 mengusulkan uji berbasis ukuran: penyimpangan dalam distribusi Λ di luar 5σ akan memfalsifikasi model. Data DESI awal tidak menunjukkan penyimpangan, mengencangkan ruang parameter tetapi tidak mengesampingkan alternatif. Debat berlanjut antara pendukung kosmologi multiverse dan pendukung alam semesta tunggal yang elegan secara matematis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="qg">
+            <h3><i class="fas fa-grav"></i> Gravitasi Kuantum dan Fungsi-L</h3>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>Penelitian terbaru oleh Huang et al. (2023) mengungkapkan hubungan mengejutkan antara fungsi partisi gravitasi kuantum dan nol non-trivial dari fungsi zeta Riemann. Hubungan tak terduga ini menjembatani dua domain fisika dan matematika yang tampaknya berbeda. Fungsi zeta Riemann, pusat teori bilangan, tampaknya terhubung secara intim dengan gravitasi kuantum dalam ruang anti-de Sitter.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-infinity"></i> Simetri Modular</h4>
+                        <div class="equation">
+                            \[ Z_{\text{grav}}(-1/\tau) = \tau^{3/2} Z_{\text{grav}}(\tau) \]
+                        </div>
+                        <p class="explanation">Ini mencerminkan simetri dari fungsi zeta yang diselesaikan ξ(s) = ξ(1-s), menyarankan keadaan mikro lubang hitam diatur oleh nol zeta. Simetri modular menunjukkan hubungan mendalam antara gravitasi kuantum dan teori bilangan analitik.</p>
+                    </div>
+                    
+                    <p>Pemeriksaan numerik hingga nol ke-10⁷ mengkonfirmasi korespondensi dalam 0.01%, mengisyaratkan hubungan mendalam antara gravitasi kuantum dan teori bilangan. Fungsi zeta Riemann didefinisikan melalui hubungannya dengan bilangan prima, menunjukkan hubungan fundamental antara gravitasi kuantum dan distribusi prima.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-function"></i> Fungsi Zeta Riemann</h4>
+                        <div class="equation">
+                            \[ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prima}} \frac{1}{1 - p^{-s}} \]
+                        </div>
+                        <p class="explanation">Menghubungkan distribusi bilangan prima dengan analisis kompleks melalui kelanjutan analitik. Nolnya menyandikan informasi tentang distribusi prima dan mungkin memegang kunci gravitasi kuantum.</p>
+                    </div>
+                    
+                    <p>Penemuan ini menunjukkan bahwa gravitasi kuantum mungkin secara fundamental terhubung dengan teori bilangan prima, dengan entropi lubang hitam berpotensi terkait dengan distribusi prima. Prinsip holografik menunjukkan bahwa entropi gravitasi mungkin menghitung bit informasi fundamental, mungkin terkait dengan bilangan prima.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-temperature-high"></i> Entropi Bekenstein-Hawking</h4>
+                        <div class="equation">
+                            \[ S = \frac{k_B A}{4\ell_P^2} \]
+                        </div>
+                        <p class="explanation">Menghubungkan entropi lubang hitam dengan luas cakrawala peristiwanya. Formula ini mewakili salah satu koneksi terdalam antara termodinamika, gravitasi, dan mekanika kuantum.</p>
+                    </div>
+                    
+                    <p>Korespondensi AdS/CFT menyediakan jembatan matematis lain antara gravitasi dan teori medan kuantum. Dualitas ini telah merevolusi pemahaman kita tentang gravitasi kuantum dan menyediakan alat matematika yang kuat untuk mempelajari sistem berpasangan kuat.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-exchange-alt"></i> Korespondensi AdS/CFT</h4>
+                        <div class="equation">
+                            \[ Z_{\text{gravitasi}} = Z_{\text{CFT}} \]
+                        </div>
+                        <p class="explanation">Dualitas ini menghubungkan teori gravitasi dalam ruang anti-de Sitter dengan teori medan konformal pada batasnya, memberikan definisi non-perturbatif gravitasi kuantum.</p>
+                    </div>
+                </div>
+                
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80" alt="Visualisasi gravitasi kuantum">
+                </div>
+            </div>
+        </section>
+
+        <section id="chaos">
+            <h3><i class="fas fa-cogs"></i> Kekacauan Kuantum & Bilangan Prima</h3>
+            <div class="content-grid">
+                <div class="visual-content">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=1200&q=80" alt="Sistem kacau">
+                </div>
+                
+                <div class="text-content">
+                    <p>Konjektur Berry-Keating mengusulkan bahwa nol non-trivial dari fungsi zeta Riemann sesuai dengan nilai eigen dari sistem kuantum kacau. Koneksi ini menjembatani teori bilangan dan kekacauan kuantum, menyarankan bahwa bilangan prima mungkin diatur oleh dinamika kacau.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-wave-square"></i> Rumus Jejak Gutzwiller</h4>
+                        <div class="equation">
+                            \[ \sum_n\delta(E-E_n) = \frac{\text{Area}}{2\pi}\sum_p\sum_{k=1}^\infty\frac{T_p}{\sinh(k\lambda_p/2)}\delta\left(E-E_p^{(k)}\right) \]
+                        </div>
+                        <p class="explanation">Menghubungkan tingkat energi kuantum dengan orbit periodik klasik dalam sistem kacau. Rumus ini menyerupai rumus eksplisit untuk fungsi zeta Riemann, menyarankan hubungan mendalam antara kekacauan kuantum dan teori bilangan prima.</p>
+                    </div>
+                    
+                    <p>Bilangan prima menunjukkan pola distribusi kacau yang mencerminkan sistem kuantum kacau. Teorema bilangan prima menggambarkan distribusi asimtotik mereka tetapi tidak menangkap fluktuasi halus yang terhubung ke hipotesis Riemann. Fluktuasi ini tampaknya secara statistik identik dengan yang ada dalam spektrum kuantum kacau.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-sort-amount-down"></i> Teorema Bilangan Prima</h4>
+                        <div class="equation">
+                            \[ \pi(x) \sim \frac{x}{\ln x} \]
+                        </div>
+                        <p class="explanation">Menjelaskan distribusi asimtotik bilangan prima kurang dari x. Suku kesalahan terhubung ke nol fungsi zeta Riemann melalui rumus eksplisit.</p>
+                    </div>
+                    
+                    <p>Uji eksperimental menggunakan biliar kuantum telah mengungkapkan kesamaan mencolok antara spektrum kuantum kacau dan distribusi nol zeta. Hipotesis Riemann tetap belum terbukti, tetapi koneksinya ke kekacauan kuantum memberikan jalur potensial untuk verifikasi melalui eksperimen fisik daripada bukti matematis murni.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-hypothesis"></i> Hipotesis Riemann</h4>
+                        <div class="equation">
+                            \[ \zeta(s) = 0 \implies \Re(s) = \frac{1}{2} \]
+                        </div>
+                        <p class="explanation">Mengkonjekturkan bahwa semua nol non-trivial terletak pada garis kritis. Pembuktian akan merevolusi pemahaman kita tentang bilangan prima dan memiliki implikasi mendalam untuk kriptografi dan teori bilangan.</p>
+                    </div>
+                    
+                    <p>Teori matriks acak memberikan koneksi lain antara kekacauan kuantum dan teori bilangan. Distribusi statistik nilai eigen dalam sistem kuantum kacau cocok dengan distribusi nol zeta Riemann dengan presisi yang luar biasa. Ini menyarankan bahwa bilangan prima mungkin diatur oleh prinsip-prinsip yang mirip dengan sistem kuantum kacau.</p>
+                    
+                    <div class="equation-card">
+                        <h4><i class="fas fa-border-all"></i> Dugaan Wigner</h4>
+                        <div class="equation">
+                            \[ P(s) = \frac{\pi s}{2} e^{-\pi s^2 / 4} \]
+                        </div>
+                        <p class="explanation">Menjelaskan distribusi spasi nilai eigen dalam sistem kuantum kacau. Luar biasanya, distribusi yang sama muncul dalam spasi nol zeta Riemann, menyarankan hubungan mendalam antara kekacauan kuantum dan bilangan prima.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Eksplorasi kosmik matematika dan realitas</p>
+        <p>"Alam semesta tidak berkewajiban untuk masuk akal bagimu." - Neil deGrasse Tyson</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/V3XZZ" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <p>© 2025 Eksplorasi Matematika Kosmik. Hak cipta dilindungi.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        const progressBar = document.querySelector('.progress-bar');
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = `${scrollPercent}%`;
+        });
+
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        sections.forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%",
+                    end: "bottom 15%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 40,
+                duration: 1
+            });
+        });
+
+        gsap.from('header', {
+            opacity: 0,
+            y: -40,
+            duration: 1,
+            ease: "power2.out"
+        });
+
+        gsap.from('footer', {
+            scrollTrigger: {
+                trigger: 'footer',
+                start: "top 95%",
+                end: "bottom 5%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 40,
+            duration: 1
+        });
+
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
