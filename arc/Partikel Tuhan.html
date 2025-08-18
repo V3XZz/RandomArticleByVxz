@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partikel Tuhan: Eksplorasi Higgs Boson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --deep-space: #0a0e2a;
+            --cosmic-purple: #2a0a4a;
+            --neon-cyan: #00ffff;
+            --bright-pink: #ff00a0;
+            --starlight: #e0e0ff;
+            --galaxy-blue: #1a1a5e;
+            --particle-glow: rgba(0, 255, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--deep-space), var(--cosmic-purple));
+            color: var(--starlight);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 42, 0.85);
+            border-bottom: 1px solid var(--neon-cyan);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--bright-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 25px;
+        }
+        
+        nav a {
+            color: var(--starlight);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            height: 5px;
+            background: rgba(42, 10, 74, 0.5);
+            z-index: 999;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--bright-pink));
+            transition: width 0.1s ease;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--deep-space) 80%);
+            z-index: -1;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 20px); }
+            50% { transform: translate(0, 40px); }
+            75% { transform: translate(-20px, 20px); }
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--bright-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+        
+        .hero .cta-button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--bright-pink));
+            color: var(--deep-space);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .hero .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.7);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        section {
+            margin-bottom: 100px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(26, 26, 94, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--neon-cyan);
+            display: flex;
+            align-items: center;
+        }
+        
+        section h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .formulas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .formula-card {
+            background: rgba(10, 14, 42, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--particle-glow) 0%, transparent 70%);
+            opacity: 0.2;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .formula-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+            border-color: var(--neon-cyan);
+        }
+        
+        .formula-card:hover::before {
+            opacity: 0.4;
+        }
+        
+        .formula-card h3 {
+            color: var(--bright-pink);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .formula-content {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .formula-card p {
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+        
+        .visualization {
+            width: 100%;
+            height: 400px;
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .visualization img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .visualization:hover img {
+            transform: scale(1.05);
+        }
+        
+        .visualization .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 14, 42, 0.8);
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--bright-pink));
+            color: var(--deep-space);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.6);
+        }
+        
+        footer {
+            background: rgba(10, 14, 42, 0.9);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid var(--neon-cyan);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .credits {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 14, 42, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: right 0.3s ease;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav li {
+                margin: 20px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .formulas {
+                grid-template-columns: 1fr;
+            }
+            
+            .visualization {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+                <span>Partikel Tuhan</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#introduction"><i class="fas fa-home"></i> Pendahuluan</a></li>
+                    <li><a href="#standard-model"><i class="fas fa-shapes"></i> Model Standar</a></li>
+                    <li><a href="#higgs-mechanism"><i class="fas fa-cogs"></i> Mekanisme Higgs</a></li>
+                    <li><a href="#discovery"><i class="fas fa-search"></i> Penemuan</a></li>
+                    <li><a href="#significance"><i class="fas fa-star"></i> Signifikansi</a></li>
+                    <li><a href="#future"><i class="fas fa-rocket"></i> Masa Depan</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero" id="hero">
+        <div class="particles" id="particles"></div>
+        <h1>Partikel Tuhan: Higgs Boson</h1>
+        <p>Eksplorasi Interaktif tentang Partikel yang Membentuk Alam Semesta</p>
+        <button class="cta-button" id="exploreBtn">Mulai Eksplorasi <i class="fas fa-arrow-down"></i></button>
+    </section>
+    
+    <div class="container">
+        <section id="introduction">
+            <h2><i class="fas fa-compass"></i> Pendahuluan: Partikel Tuhan</h2>
+            <p>Higgs boson, sering dijuluki "Partikel Tuhan", adalah salah satu penemuan terpenting dalam fisika partikel abad ke-21. Partikel ini pertama kali diusulkan oleh Peter Higgs dan rekan-rekannya pada tahun 1964 sebagai bagian dari mekanisme yang menjelaskan bagaimana partikel elementer memperoleh massa.</p>
+            <p>Eksistensi Higgs boson adalah kunci untuk memahami mengapa beberapa partikel memiliki massa sementara yang lain tidak. Tanpa mekanisme ini, model standar fisika partikel tidak akan dapat menjelaskan struktur dasar alam semesta seperti yang kita kenal.</p>
+            <p>Penemuan Higgs boson pada tahun 2012 di Large Hadron Collider (LHC) CERN menandai puncak dari pencarian selama puluhan tahun dan mengkonfirmasi prediksi terakhir yang belum terverifikasi dari Model Standar fisika partikel.</p>
+            <p>Julukan "Partikel Tuhan" berasal dari buku karya Leon Lederman, meskipun ia mengaku menyesali julukan tersebut karena dianggap terlalu sensasional. Julukan ini tetap melekat karena pentingnya partikel ini dalam menjelaskan asal-usul massa.</p>
+            <p>Dalam eksplorasi ini, kita akan menyelami misteri Higgs boson, mekanisme kerjanya, signifikansinya dalam kosmologi, dan implikasinya untuk masa depan fisika fundamental.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Persamaan Lagrangian Higgs</h3>
+                    <div class="formula-content">
+                        $$\mathcal{L} = (D_\mu \phi)^\dagger (D^\mu \phi) - \mu^2 \phi^\dagger \phi - \lambda (\phi^\dagger \phi)^2$$
+                    </div>
+                    <p>Persamaan dasar yang menggambarkan medan Higgs dan interaksinya dalam Model Standar.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Massa Partikel</h3>
+                    <div class="formula-content">
+                        $$m_f = \frac{y_f v}{\sqrt{2}}$$
+                    </div>
+                    <p>Formula yang menunjukkan bagaimana massa fermion (f) muncul dari interaksi Yukawa (y) dengan medan Higgs.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Potensial Higgs</h3>
+                    <div class="formula-content">
+                        $$V(\phi) = \mu^2 \phi^\dagger \phi + \lambda (\phi^\dagger \phi)^2$$
+                    </div>
+                    <p>Fungsi potensial yang menggambarkan energi medan Higgs. Bentuk "topi Meksiko" ini memungkinkan pemecahan simetri spontan.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Visualisasi Partikel Higgs">
+                <div class="caption">Visualisasi konseptual medan Higgs dan interaksinya dengan partikel elementer.</div>
+            </div>
+        </section>
+
+        <section id="standard-model">
+            <h2><i class="fas fa-cube"></i> Model Standar Fisika Partikel</h2>
+            <p>Model Standar adalah kerangka teoritis yang menggambarkan partikel elementer penyusun materi dan tiga dari empat gaya fundamental alam (elektromagnetik, lemah, dan kuat, kecuali gravitasi). Model ini telah diverifikasi secara eksperimental dengan akurasi yang luar biasa.</p>
+            <p>Dalam Model Standar, partikel diklasifikasikan menjadi dua kelompok utama: fermion (partikel materi) dan boson (partikel pembawa gaya). Higgs boson termasuk dalam kategori boson skalar, yang berarti ia memiliki spin 0 dan tidak membawa muatan warna atau elektromagnetik.</p>
+            <p>Sebelum penemuan Higgs boson, Model Standar memiliki masalah mendasar: persamaan yang menggambarkan partikel tanpa massa bekerja dengan baik, tetapi partikel seperti elektron dan quark memang memiliki massa. Higgs boson memberikan solusi untuk masalah ini melalui mekanisme pemecahan simetri elektrolemah.</p>
+            <p>Medan Higgs meresapi seluruh ruang, dan interaksi partikel dengan medan inilah yang memberikan massa kepada mereka. Analoginya seperti selebriti yang berjalan melalui kerumunan - beberapa (partikel massif) berinteraksi kuat dengan kerumunan dan bergerak lambat, sementara yang lain (foton) tidak berinteraksi dan bergerak dengan kecepatan cahaya.</p>
+            <p>Meskipun sangat sukses, Model Standar tidak lengkap. Ia tidak menjelaskan gravitasi, materi gelap, energi gelap, atau asimetri materi-antimateri di alam semesta. Penemuan Higgs boson membuka jalan untuk mengeksplorasi fisika di luar Model Standar.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Persamaan Dirac</h3>
+                    <div class="formula-content">
+                        $$(i\gamma^\mu \partial_\mu - m)\psi = 0$$
+                    </div>
+                    <p>Persamaan dasar yang menggambarkan perilaku fermion dalam fisika kuantum.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Kekekalan Muatan</h3>
+                    <div class="formula-content">
+                        $$\partial_\mu J^\mu = 0$$
+                    </div>
+                    <p>Hukum kekekalan muatan listrik dalam teori medan kuantum.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Persamaan Klein-Gordon</h3>
+                    <div class="formula-content">
+                        $$(\partial^\mu \partial_\mu + m^2)\phi = 0$$
+                    </div>
+                    <p>Persamaan gerak untuk boson skalar seperti Higgs boson.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80" alt="Model Standar Fisika Partikel">
+                <div class="caption">Diagram Model Standar yang menunjukkan partikel elementer dan interaksinya.</div>
+            </div>
+        </section>
+        
+        <section id="higgs-mechanism">
+            <h2><i class="fas fa-microscope"></i> Mekanisme Higgs</h2>
+            <p>Mekanisme Higgs adalah proses di mana medan Higgs memberikan massa kepada partikel elementer melalui interaksi dengan mereka. Proses ini melibatkan pemecahan simetri spontan dari gaya elektrolemah menjadi gaya elektromagnetik dan gaya lemah yang terpisah.</p>
+            <p>Dalam fisika, simetri sangat penting karena menghasilkan hukum kekekalan. Namun, simetri dalam persamaan dasar alam semesta mungkin "tersembunyi" dalam keadaan energi terendah. Ini seperti pensil yang berdiri tegak - secara simetris mungkin, tetapi dalam kenyataannya akan jatuh ke satu arah, memecah simetri.</p>
+            <p>Medan Higgs memiliki nilai harapan vakum yang tidak nol, artinya bahkan di ruang hampa sekalipun, medan ini memiliki nilai tertentu. Ketika partikel berinteraksi dengan medan Higgs, mereka memperoleh massa. Kekuatan interaksi ini menentukan seberapa besar massa partikel tersebut.</p>
+            <p>Higgs boson sendiri adalah eksitasi kuantum dari medan Higgs. Penemuannya penting karena mengkonfirmasi bahwa mekanisme Higgs memang terjadi di alam. Massa Higgs boson sekitar 125 GeV/c², yang telah diukur dengan presisi tinggi di LHC.</p>
+            <p>Menariknya, foton tidak berinteraksi dengan medan Higgs, sehingga tetap tidak bermassa. Sementara itu, boson W dan Z yang membawa gaya lemah memperoleh massa besar melalui mekanisme ini, menjelaskan mengapa gaya lemah memiliki jangkauan yang sangat pendek.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Massa Boson W dan Z</h3>
+                    <div class="formula-content">
+                        $$m_W = \frac{1}{2} g v$$
+                        $$m_Z = \frac{1}{2} \sqrt{g^2 + g'^2} v$$
+                    </div>
+                    <p>Massa boson pembawa gaya lemah muncul dari interaksi dengan medan Higgs.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Kopling Yukawa</h3>
+                    <div class="formula-content">
+                        $$\mathcal{L}_{Yukawa} = -y_f \bar{\psi}_f \phi \psi_f + h.c.$$
+                    </div>
+                    <p>Interaksi yang memberikan massa pada fermion melalui medan Higgs.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Massa Higgs Boson</h3>
+                    <div class="formula-content">
+                        $$m_H = \sqrt{-2\mu^2} = \sqrt{2\lambda} v$$
+                    </div>
+                    <p>Hubungan antara massa Higgs boson dan parameter medan Higgs.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Mekanisme Higgs">
+                <div class="caption">Representasi grafis dari mekanisme Higgs dan pemecahan simetri.</div>
+            </div>
+        </section>
+
+        <section id="discovery">
+            <h2><i class="fas fa-trophy"></i> Pencarian & Penemuan</h2>
+            <p>Pencarian Higgs boson adalah salah satu usaha ilmiah terbesar dalam sejarah manusia. Butuh waktu hampir 50 tahun dari prediksi teoretis hingga konfirmasi eksperimental. Proses ini melibatkan ribuan ilmuwan dari seluruh dunia dan pembangunan mesin paling kompleks yang pernah dibuat - Large Hadron Collider (LHC) di CERN.</p>
+            <p>LHC adalah akselerator partikel berbentuk lingkaran dengan keliling 27 km, terletak 100 meter di bawah tanah di perbatasan Swiss-Prancis. Di dalamnya, proton ditabrakkan pada energi yang mendekati kecepatan cahaya, menciptakan kondisi yang mirip dengan sepersekian detik setelah Big Bang.</p>
+            <p>Pada 4 Juli 2012, kolaborasi ATLAS dan CMS mengumumkan penemuan partikel baru dengan massa sekitar 125 GeV. Data menunjukkan kelebihan peristiwa pada saluran peluruhan menjadi dua foton dan menjadi empat lepton, yang konsisten dengan prediksi untuk Higgs boson.</p>
+            <p>Peter Higgs dan François Englert dianugerahi Hadiah Nobel Fisika 2013 untuk prediksi teoretis mereka. Penemuan ini menandai puncak dari usaha kolektif komunitas fisika partikel selama beberapa dekade.</p>
+            <p>Sejak penemuan awal, properti Higgs boson telah dipelajari dengan teliti. Pengukuran presisi telah mengkonfirmasi bahwa partikel ini memang Higgs boson dari Model Standar, meskipun masih ada ruang untuk penyimpangan yang mungkin mengarah pada fisika baru.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Peluruhan Higgs ke Dua Foton</h3>
+                    <div class="formula-content">
+                        $$H \rightarrow \gamma\gamma$$
+                    </div>
+                    <p>Salah satu saluran peluruhan kunci yang digunakan untuk menemukan Higgs boson.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Penampang Lintang</h3>
+                    <div class="formula-content">
+                        $$\sigma(pp \rightarrow H) \approx 20 \text{ pb pada } \sqrt{s} = 8 \text{ TeV}$$
+                    </div>
+                    <p>Perkiraan penampang lintang produksi Higgs boson di LHC.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Signifikansi Statistik</h3>
+                    <div class="formula-content">
+                        $$5.0\sigma \text{ (ATLAS)} \\ 5.2\sigma \text{ (CMS)}$$
+                    </div>
+                    <p>Signifikansi statistik penemuan Higgs boson yang melebihi ambang 5σ untuk klaim penemuan.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1506706435692-290e0c5b4505?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Large Hadron Collider">
+                <div class="caption">Detektor CMS di Large Hadron Collider CERN, tempat Higgs boson ditemukan.</div>
+            </div>
+        </section>
+
+        <section id="significance">
+            <h2><i class="fas fa-globe-americas"></i> Signifikansi Kosmologis</h2>
+            <p>Penemuan Higgs boson memiliki implikasi mendalam bagi pemahaman kita tentang alam semesta. Medan Higgs memainkan peran penting dalam evolusi kosmik segera setelah Big Bang. Ketika alam semesta mendingin, medan Higgs mengalami transisi fase yang mengarah pada pemecahan simetri elektrolemah.</p>
+            <p>Tanpa Higgs boson dan mekanisme yang terkait, partikel elementer tidak akan memiliki massa. Ini berarti atom tidak akan terbentuk, karena elektron akan bergerak dengan kecepatan cahaya dan tidak bisa mengorbit inti atom. Bintang, planet, dan kehidupan seperti yang kita kenal tidak akan ada.</p>
+            <p>Nilai medan Higgs menentukan massa partikel dan juga mempengaruhi kekuatan interaksi fundamental. Jika nilai ini sedikit berbeda, struktur alam semesta akan berubah secara dramatis, mungkin membuat kehidupan tidak mungkin.</p>
+            <p>Medan Higgs juga terkait dengan energi vakum alam semesta. Dalam kosmologi, energi vakum dapat bertindak sebagai konstanta kosmologis yang mendorong percepatan ekspansi alam semesta. Memahami hubungan antara medan Higgs dan energi gelap adalah salah satu teka-teki terbesar dalam fisika modern.</p>
+            <p>Higgs boson mungkin juga memegang petunjuk untuk memahami asimetri materi-antimateri. Di awal alam semesta, jumlah materi dan antimateri seharusnya sama, tetapi sekarang alam semesta didominasi materi. Proses yang melibatkan Higgs boson mungkin membantu menjelaskan ketidakseimbangan ini.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Energi Vakum</h3>
+                    <div class="formula-content">
+                        $$\rho_{vac} = \frac{\lambda}{4} v^4$$
+                    </div>
+                    <p>Kontribusi medan Higgs terhadap kepadatan energi vakum alam semesta.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Parameter Alam Semesta</h3>
+                    <div class="formula-content">
+                        $$\Omega = \frac{8\pi G}{3H_0^2} \rho$$
+                    </div>
+                    <p>Parameter kepadatan yang menentukan geometri dan nasib alam semesta.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Persamaan Friedmann</h3>
+                    <div class="formula-content">
+                        $$H^2 = \left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3} \rho - \frac{kc^2}{a^2} + \frac{\Lambda c^2}{3}$$
+                    </div>
+                    <p>Persamaan dasar kosmologi yang menggambarkan ekspansi alam semesta.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1700&q=80" alt="Alam Semesta">
+                <div class="caption">Alam semesta seperti yang kita kenal bergantung pada sifat-sifat medan Higgs.</div>
+            </div>
+        </section>
+
+        <section id="future">
+            <h2><i class="fas fa-space-shuttle"></i> Masa Depan Fisika Partikel</h2>
+            <p>Meskipun penemuan Higgs boson menyelesaikan Model Standar, ia juga membuka pintu untuk fisika baru yang lebih mendasar. Pengukuran properti Higgs boson yang lebih presisi dapat mengungkap penyimpangan dari prediksi Model Standar, yang akan menjadi indikasi fisika di luar Model Standar.</p>
+            <p>Salah satu pertanyaan besar adalah apakah Higgs boson benar-benar elementer atau apakah ia memiliki substruktur. Beberapa teori seperti supersimetri memprediksi keberadaan beberapa Higgs boson. Pencarian Higgs boson tambahan merupakan prioritas utama di LHC.</p>
+            <p>Higgs boson juga dapat menjadi portal untuk memahami materi gelap. Jika materi gelap berinteraksi melalui gaya yang sangat lemah, interaksi tersebut mungkin dimediasi oleh Higgs boson. Eksperimen sedang mencari tanda-tanda Higgs boson meluruh menjadi partikel materi gelap.</p>
+            <p>Di masa depan, akselerator yang lebih kuat seperti Future Circular Collider (FCC) yang diusulkan di CERN atau International Linear Collider (ILC) akan mempelajari Higgs boson dengan presisi yang lebih tinggi. Fasilitas ini dapat mengukur sifat Higgs boson dengan ketidakpastian di bawah 1%, menguji batas Model Standar.</p>
+            <p>Memahami sepenuhnya sifat Higgs boson mungkin mengarah pada teori terpadu yang mencakup gravitasi kuantum. Beberapa pendekatan teori string dan gravitasi kuantum loop membuat prediksi spesifik tentang perilaku Higgs boson pada skala energi yang sangat tinggi.</p>
+            
+            <div class="formulas">
+                <div class="formula-card">
+                    <h3>Persamaan Klein-Gordon-Fock</h3>
+                    <div class="formula-content">
+                        $$\Box \phi - m^2 \phi + \frac{\lambda}{6} \phi^3 = 0$$
+                    </div>
+                    <p>Persamaan gerak untuk medan Higgs dengan interaksi diri.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Produksi Higgs di Collider Masa Depan</h3>
+                    <div class="formula-content">
+                        $$\sigma(e^+e^- \rightarrow ZH) \approx \frac{G_F^2 m_Z^4}{96\pi s} (v_e^2 + a_e^2) \beta \frac{3 - \beta^2}{2}$$
+                    </div>
+                    <p>Perkiraan produksi Higgs di collider elektron-positron masa depan.</p>
+                </div>
+                
+                <div class="formula-card">
+                    <h3>Persamaan Medan Einstein</h3>
+                    <div class="formula-content">
+                        $$R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu}$$
+                    </div>
+                    <p>Persamaan dasar relativitas umum, yang suatu hari mungkin disatukan dengan mekanika kuantum melalui pemahaman yang lebih dalam tentang Higgs boson.</p>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1730&q=80" alt="Masa Depan Fisika Partikel">
+                <div class="caption">Eksperimen fisika partikel masa depan akan menyelidiki sifat Higgs boson lebih dalam.</div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="credits">
+                Dikembangkan oleh V3XZZ (GitHub: V3XZZ) © 2025
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            MathJax.typesetPromise();
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navMenu.classList.remove('active');
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            const exploreBtn = document.getElementById('exploreBtn');
+            exploreBtn.addEventListener('click', () => {
+                document.querySelector('#introduction').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+            
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPosition = window.scrollY;
+                const progress = (scrollPosition / scrollTotal) * 100;
+                progressBar.style.width = progress + '%';
+            });
+            
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray('section').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reset'
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1
+                });
+            });
+            
+            gsap.utils.toArray('.formula-card').forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reset'
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    stagger: 0.2
+                });
+            });
+        });
+        
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const colors = ['var(--neon-cyan)', 'var(--bright-pink)', 'white'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+    </script>
+</body>
+</html>
