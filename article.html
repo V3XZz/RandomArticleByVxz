@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Article By Vxz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --deep-blue: #0d1b2a;
+            --cosmic-purple: #3d348b;
+            --neon-cyan: #00e5ff;
+            --vibrant-pink: #ff3cac;
+            --star-yellow: #ffd700;
+            --galaxy-indigo: #1a1a40;
+            --space-gray: #1e1e2c;
+            --light-space: #e0e1dd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-blue), var(--galaxy-indigo));
+            color: var(--light-space);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 27, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--neon-cyan);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        .logo i {
+            color: var(--vibrant-pink);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--light-space);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--light-space);
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--deep-blue) 80%), 
+                        url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-blend-mode: multiply;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--neon-cyan), var(--vibrant-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .random-btn {
+            background: linear-gradient(45deg, var(--neon-cyan), var(--vibrant-pink));
+            color: var(--deep-blue);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .random-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 60, 172, 0.4);
+        }
+
+        .random-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--vibrant-pink), var(--neon-cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .random-btn:hover::before {
+            opacity: 1;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 101;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--vibrant-pink));
+            transition: width 0.2s ease;
+        }
+
+        .articles {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .article-card {
+            background: rgba(30, 30, 44, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2);
+            border: 1px solid var(--neon-cyan);
+        }
+
+        .article-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--neon-cyan);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 60, 172, 0.2);
+            color: var(--vibrant-pink);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .article-excerpt {
+            color: rgba(224, 225, 221, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--vibrant-pink);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--vibrant-pink));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--deep-blue);
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: rgba(13, 27, 42, 0.9);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--neon-cyan);
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .developer-credit {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .developer-credit a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .developer-credit a:hover {
+            color: var(--vibrant-pink);
+            text-decoration: underline;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .article-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                background: rgba(13, 27, 42, 0.95);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-150%);
+                transition: transform 0.4s ease;
+                z-index: 99;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <header>
+        <div class="logo">
+            <i class="fas fa-star"></i>
+            <span>Random Article By Vxz</span>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>Jelajahi Dunia Pengetahuan</h1>
+        <p>Temukan artikel menarik dan acak tentang sains, teknologi, dan alam semesta. Setiap klik membawa petualangan baru!</p>
+    </section>
+    
+
+    <section class="articles">
+        <h2 style="text-align: center; margin-bottom: 3rem; color: var(--neon-cyan);"> <i class="fas fa-clock" style="margin-right: 8px;"></i> Artikel Terbaru</h2>
+        <div class="article-grid">
+
+            <div class="article-card animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Space" class="article-img">
+                <div class="article-content">
+                    <span class="article-category">Matematika</span>
+                    <h3 class="article-title">Apakah Tuhan Seorang Matematikawan?</h3>
+                    <p class="article-excerpt">Apakah hukum-hukum matematika yang begitu presisi dalam mengatur alam semesta menunjukkan bahwa Tuhan adalah seorang matematikawan? Dari struktur geometri kosmos, keteraturan bilangan, hingga persamaan yang menggambarkan partikel dan galaksi, apakah semua ini sekadar hasil kebetulan, atau justru sebuah desain matematis yang sengaja ditanamkan sejak awal penciptaan?</p>
+                    <a href="./arc/igm.html" class="read-more">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+    </section>
+    
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-stars"></i>
+                <span>Random Article By Vxz</span>
+            </div>
+            <p class="developer-credit">
+                Dikembangkan oleh V3XZZ (GitHub: <a href="https://github.com/V3XZZ" target="_blank">V3XZZ</a>) © 2025
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            gsap.fromTo(element, 
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+        
+        gsap.from('.hero h1', {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+        
+        gsap.from('.hero p', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+        
+        gsap.from('.random-btn', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.6,
+            ease: "power3.out"
+        });
+        
+        window.onscroll = function() {
+            updateProgressBar();
+            toggleBackToTop();
+        };
+        
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+        
+        function toggleBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+        
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        document.getElementById('randomBtn').addEventListener('click', function() {
+            const btn = this;
+            
+            gsap.to(btn, {
+                scale: 0.9,
+                duration: 0.2,
+                yoyo: true,
+                repeat: 1,
+                ease: "power1.inOut",
+                onComplete: function() {
+                    const articles = document.querySelectorAll('.article-card');
+                    const randomIndex = Math.floor(Math.random() * articles.length);
+                    
+                    articles[randomIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    
+                    articles.forEach(article => article.style.border = '1px solid rgba(0, 229, 255, 0.3)');
+                    articles[randomIndex].style.border = '2px solid var(--vibrant-pink)';
+                    
+                    gsap.to(articles[randomIndex], {
+                        boxShadow: '0 0 30px rgba(255, 60, 172, 0.6)',
+                        duration: 0.5,
+                        yoyo: true,
+                        repeat: 3
+                    });
+                }
+            });
+        });
+        
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+        
+        const cards = document.querySelectorAll('.article-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.03,
+                    duration: 0.3
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.from('.logo', {
+                duration: 1,
+                x: -30,
+                opacity: 0,
+                ease: "power3.out"
+            });
+            
+            gsap.from('nav ul li', {
+                duration: 0.8,
+                x: 30,
+                opacity: 0,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.5
+            });
+        });
+    </script>
+</body>
+</html>
