@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kesempurnaan Alam Semesta | Harmoni Matematika & Kosmos</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --deep-space: #0a0e17;
+            --cosmic-purple: #1a1a40;
+            --nebula-blue: #16213e;
+            --neon-cyan: #00d4ff;
+            --bright-pink: #ff2a6d;
+            --starlight: #f5f5f5;
+            --galaxy-gradient: linear-gradient(135deg, var(--nebula-blue), var(--cosmic-purple));
+            --accent-gradient: linear-gradient(90deg, var(--neon-cyan), var(--bright-pink));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--deep-space);
+            color: var(--starlight);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(26, 26, 64, 0.5) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(22, 33, 62, 0.5) 0%, transparent 25%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s;
+            background: rgba(10, 14, 23, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        header.sticky {
+            padding: 0.8rem 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            color: var(--starlight);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--starlight);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 42, 109, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--starlight);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+
+        section {
+            padding: 5rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .text-content {
+            padding-right: 2rem;
+        }
+
+        .text-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .visualization {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .visualization:hover {
+            transform: translateY(-5px);
+        }
+
+        .visualization img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .equation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .equation-card {
+            background: var(--galaxy-gradient);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .equation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .equation {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .equation-explanation {
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: var(--galaxy-gradient);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .credits {
+            font-size: 1rem;
+            margin-top: 2rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .text-content {
+                padding-right: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                flex-direction: column;
+                background: var(--galaxy-gradient);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                padding: 6rem 2rem;
+                transition: 0.5s;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hamburger {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .equation-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header id="header">
+        <div class="logo">
+            <i class="fas fa-star-and-crescent"></i>
+            <span>Harmoni Kosmik</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#pendahuluan">Pendahuluan</a></li>
+            <li><a href="#rasio-emas">Rasio Emas</a></li>
+            <li><a href="#fraktal">Fraktal Alam</a></li>
+            <li><a href="#fibonacci">Fibonacci</a></li>
+            <li><a href="#fisika">Fisika Kosmos</a></li>
+            <li><a href="#chaos">Teori Chaos</a></li>
+            <li><a href="#simetri">Simetri</a></li>
+            <li><a href="#string">Teori String</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Kesempurnaan Alam Semesta</h1>
+        <p>Menjelajahi Harmoni Tersembunyi antara Matematika dan Kosmos</p>
+        <a href="#pendahuluan" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <section id="pendahuluan">
+        <h2 class="section-title">Matematika: Bahasa Alam Semesta</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Sejak zaman kuno, manusia telah mengamati keteraturan dan pola dalam alam semesta. Dari pergerakan bintang-bintang hingga bentuk cangkang kerang, matematika muncul sebagai bahasa universal yang mendeskripsikan realitas fisik kita. Galileo Galilei menyatakan bahwa alam semesta adalah "buku besar yang ditulis dalam bahasa matematika."</p>
+                <p>Setiap aspek kosmos, dari skala subatomik hingga gugus galaksi, mengikuti prinsip-prinsip matematika yang konsisten. Konstanta fundamental seperti kecepatan cahaya (c) dan konstanta gravitasi (G) memiliki nilai yang tampaknya diatur secara tepat untuk memungkinkan keberadaan alam semesta yang kompleks dan kehidupan itu sendiri.</p>
+                <p>Keindahan matematika tidak hanya terletak pada kemampuannya untuk mendeskripsikan apa yang kita amati, tetapi juga dalam kemampuannya untuk memprediksi keberadaan fenomena yang sebelumnya tidak diketahui. Melalui persamaan matematika, manusia telah meramalkan keberadaan planet, partikel subatomik, dan bahkan gelombang gravitasi sebelum konfirmasi observasionalnya.</p>
+                <p>Matematika juga mengungkapkan bahwa alam semesta memiliki struktur hierarkis yang kompleks, dengan pola yang berulang pada skala yang berbeda. Simetri dan invarian yang mendasari hukum fisika menunjukkan adanya prinsip-prinsip fundamental yang mengatur segala sesuatu dari interaksi kuantum hingga perluasan kosmik.</p>
+                <p>Dalam eksplorasi ini, kita akan menyelami beberapa konsep matematika paling elegan yang terwujud dalam alam semesta, mengungkap keajaiban dan keindahan yang sering tersembunyi dari pandangan sehari-hari.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Alam Semesta Matematis">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ e^{i\pi} + 1 = 0 \]</div>
+                <p class="equation-explanation">Identitas Euler, sering disebut sebagai persamaan paling indah dalam matematika, menghubungkan lima konstanta fundamental: e (basis logaritma natural), i (unit imajiner), π (pi), 1 (satuan perkalian), dan 0 (identitas penjumlahan).</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} \]</div>
+                <p class="equation-explanation">Kecepatan cahaya dalam vakum (c) diturunkan dari dua konstanta fundamental: permeabilitas magnetik vakum (μ₀) dan permitivitas listrik vakum (ε₀). Hubungan ini menunjukkan bagaimana konstanta alam saling terkait.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ E = mc^2 \]</div>
+                <p class="equation-explanation">Persamaan ikonik Einstein yang menunjukkan kesetaraan antara massa dan energi, mengungkapkan bahwa massa dapat diubah menjadi energi dan sebaliknya, dengan kuadrat kecepatan cahaya sebagai faktor konversi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rasio-emas">
+        <h2 class="section-title">Rasio Emas dalam Desain Alam</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Rasio Emas (φ), sekitar 1.618, adalah proporsi matematika yang telah memesona matematikawan, seniman, dan arsitek selama berabad-abad. Bilangan irasional ini muncul ketika sebuah garis dibagi menjadi dua bagian sedemikian rupa sehingga rasio keseluruhan garis terhadap bagian yang lebih besar sama dengan rasio bagian yang lebih besar terhadap bagian yang lebih kecil.</p>
+                <p>Dalam alam, Rasio Emas muncul dalam berbagai bentuk dan struktur. Cangkang nautilus tumbuh dalam spiral logaritmik yang mempertahankan proporsi emas. Bunga matahari mengatur bijinya dalam pola spiral yang mengikuti urutan Fibonacci, yang rasio berturut-turutnya mendekati φ. Bahkan proporsi tubuh manusia sering mendekati rasio emas.</p>
+                <p>Pohon menggunakan Rasio Emas dalam pola percabangannya untuk mengoptimalkan paparan cahaya dan efisiensi struktural. Rasio antara diameter cabang yang berurutan seringkali mendekati φ, menciptakan struktur yang stabil dan efisien secara energi.</p>
+                <p>Di tingkat molekuler, Rasio Emas muncul dalam struktur DNA. Heliks ganda DNA memiliki panjang 34 angstrom dan lebar 21 angstrom dalam setiap siklus lengkap, dan 34/21 ≈ 1.619, sangat dekat dengan φ. Ini menunjukkan bahwa proporsi ilahi ini tertanam dalam blok bangunan fundamental kehidupan itu sendiri.</p>
+                <p>Keberadaan Rasio Emas di seluruh alam menunjukkan adanya prinsip desain universal yang mengoptimalkan baik bentuk maupun fungsi. Dari skala kosmik hingga kuantum, φ muncul sebagai konstanta fundamental yang mengatur estetika dan efisiensi alam semesta.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Rasio Emas dalam Alam">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ \phi = \frac{1 + \sqrt{5}}{2} \approx 1.6180339887... \]</div>
+                <p class="equation-explanation">Definisi matematis Rasio Emas (φ) sebagai solusi positif dari persamaan φ² = φ + 1. Bilangan ini memiliki sifat unik di mana kebalikannya sama dengan dirinya sendiri dikurangi 1.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ F(n) = \frac{\phi^n - (1-\phi)^n}{\sqrt{5}} \]</div>
+                <p class="equation-explanation">Rumus Binet untuk deret Fibonacci, yang menunjukkan hubungan eksplisit antara bilangan Fibonacci dan Rasio Emas. Saat n meningkat, rasio F(n+1)/F(n) semakin mendekati φ.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \lim_{n \to \infty} \frac{F_{n+1}}{F_n} = \phi \]</div>
+                <p class="equation-explanation">Limit rasio antara bilangan Fibonacci yang berurutan mendekati Rasio Emas saat n mendekati tak terhingga. Ini menjelaskan mengapa pola Fibonacci dalam alam sering berkorelasi dengan φ.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fraktal">
+        <h2 class="section-title">Geometri Fraktal Alam Semesta</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Fraktal adalah pola geometris yang kompleks dan mandiri yang berulang pada skala yang berbeda. Konsep ini, yang diperkenalkan oleh Benoît Mandelbrot pada tahun 1975, telah merevolusi pemahaman kita tentang bentuk alam. Fraktal menggambarkan banyak struktur di alam yang terlalu tidak teratur untuk dijelaskan oleh geometri Euclidean tradisional.</p>
+                <p>Di alam, kita menemukan fraktal dalam bentuk pepohonan, sistem pembuluh darah, garis pantai, awan, dan bahkan dalam distribusi galaksi di alam semesta. Setiap bagian dari struktur fraktal menyerupai keseluruhan, properti yang dikenal sebagai kesamaan diri. Cabang pohon menyerupai pohon itu sendiri, dan anak sungai menyerupai sistem sungai yang lebih besar.</p>
+                <p>Sistem pernapasan manusia adalah contoh fraktal biologis yang menakjubkan. Bronkus bercabang menjadi bronkiolus yang lebih kecil, yang pada gilirannya bercabang menjadi saluran alveolar, menciptakan luas permukaan yang sangat besar dalam volume terbatas dada manusia. Desain fraktal ini mengoptimalkan pertukaran gas dengan efisiensi ruang yang luar biasa.</p>
+                <p>Alam semesta itu sendiri menunjukkan properti fraktal dalam distribusi materi. Galaksi tidak tersebar secara acak di ruang angkasa tetapi membentuk jaringan kompleks filamen dan void yang menyerupai struktur saraf atau jaringan pembuluh darah. Pada skala terbesar, alam semesta tampaknya memiliki struktur fraktal dengan kluster galaksi, superkluster, dan tembok galaksi raksasa.</p>
+                <p>Studi tentang fraktal telah mengungkapkan bahwa banyak sistem alam mengikuti hukum kekuatan dan menunjukkan invariansi skala. Pemahaman ini telah menerapkan aplikasi dalam berbagai bidang, dari mengkompresi gambar digital hingga memodelkan pertumbuhan populasi dan memprediksi perilaku pasar keuangan.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Geometri Fraktal">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ D = \frac{\log N}{\log s} \]</div>
+                <p class="equation-explanation">Rumus untuk dimensi fraktal (D), di mana N adalah jumlah salinan diri yang dihasilkan ketika objek diskalakan dengan faktor s. Untuk fraktal, D biasanya bukan bilangan bulat.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ z_{n+1} = z_n^2 + c \]</div>
+                <p class="equation-explanation">Rumus iteratif yang menghasilkan himpunan Mandelbrot, fraktal paling terkenal. Perilaku iterasi ini menghasilkan pola kompleks yang tak terduga dari persamaan sederhana.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ L(\epsilon) = k \cdot \epsilon^{1-D} \]</div>
+                <p class="equation-explanation">Hubungan panjang pengukuran (L) dengan skala pengukuran (ε) untuk objek fraktal, di mana k adalah konstanta dan D adalah dimensi fraktal. Ini menjelaskan paradoks garis pantai.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fibonacci">
+        <h2 class="section-title">Bilangan Fibonacci dan Spiral Emas</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Deret Fibonacci, dinamai menurut matematikawan Italia Leonardo dari Pisa (dikenal sebagai Fibonacci), adalah urutan di mana setiap angka adalah jumlah dari dua angka sebelumnya: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, dan seterusnya. Urutan sederhana ini muncul dalam konteks yang mengejutkan di seluruh alam.</p>
+                <p>Dalam kerajaan tumbuhan, bilangan Fibonacci mengatur phyllotaxis - pengaturan daun, kelopak, biji, dan bagian tanaman lainnya. Banyak bunga memiliki jumlah kelopak yang merupakan bilangan Fibonacci: lily memiliki 3 kelopak, buttercups memiliki 5, chicory memiliki 21, dan banyak aster memiliki 34 atau 55. Pengaturan ini memaksimalkan paparan cahaya dan efisiensi pengepakan.</p>
+                <p>Spiral Fibonacci, yang didekati oleh spiral emas (dibentuk dengan menggambar busur lingkaran melalui kuadrat berukuran Fibonacci), muncul dalam berbagai bentuk alam. Pola ini terlihat dalam pengaturan biji bunga matahari, susunan daun pada batang, bentuk buah nanas, dan bahkan dalam pola pusaran air dan galaksi spiral.</p>
+                <p>Di dunia hewan, bilangan Fibonacci muncul dalam pola reproduksi lebah madu. Seekor drone (lebah jantan) berkembang dari telur yang tidak dibuahi, sehingga hanya memiliki satu orangtua (betina). Sebaliknya, lebah betina memiliki dua orangtua (jantan dan betina). Dengan melacak silsilah lebah, kita menemukan bahwa jumlah nenek moyang dalam setiap generasi mengikuti deret Fibonacci.</p>
+                <p>Keberadaan pola Fibonacci di alam tidaklah kebetulan. Pola ini merupakan hasil dari proses pertumbuhan yang mengikuti aturan perkembangan sederhana yang menghasilkan struktur yang optimal. Efisiensi pengepakan spiral Fibonacci memungkinkan jumlah biji maksimum dalam kepala bunga yang terbatas, dan sudut emas yang terkait (sekitar 137,5°) memastikan bahwa setiap daun menerima cahaya maksimum tanpa menghalangi daun lainnya.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1597838816882-4435b1977fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spiral Fibonacci">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ F_n = F_{n-1} + F_{n-2} \]</div>
+                <p class="equation-explanation">Definisi rekursif deret Fibonacci, dengan kondisi awal F₀ = 0, F₁ = 1. Setiap bilangan adalah jumlah dari dua bilangan sebelumnya dalam deret.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \frac{F_{n+1}}{F_n} \approx \phi \quad \text{untuk n besar} \]</div>
+                <p class="equation-explanation">Rasio bilangan Fibonacci yang berurutan mendekati Rasio Emas (φ) saat n menjadi besar. Konvergensi ini menjelaskan hubungan mendalam antara deret Fibonacci dan φ.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \theta = 360^\circ \times (1 - \frac{1}{\phi}) \approx 137.5^\circ \]</div>
+                <p class="equation-explanation">Sudut emas, yang muncul dalam phyllotaxis dan pola spiral alam. Sudut ini memastikan pengaturan optimal untuk paparan cahaya dan pertumbuhan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fisika">
+        <h2 class="section-title">Persamaan Fundamental Fisika Kosmos</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Hukum-hukum fisika yang mengatur alam semesta diekspresikan dalam bahasa matematika. Persamaan-persamaan fundamental ini tidak hanya mendeskripsikan bagaimana alam berperilaku, tetapi juga mengungkapkan keindahan dan simetri yang mendasari realitas fisik. Dari mekanika klasik hingga teori medan kuantum, matematika memberikan kerangka kerja untuk memahami kosmos.</p>
+                <p>Mekanika Newton, dengan hukum gerak dan gravitasinya, merupakan langkah revolusioner dalam menerapkan matematika untuk mendeskripsikan alam. Hukum kedua Newton (F = ma) menghubungkan gaya, massa, dan percepatan, sementara hukum gravitasi universal menjelaskan gaya tarik-menarik antara semua benda bermassa. Persamaan-persamaan ini memungkinkan prediksi gerak planet dengan akurasi yang sebelumnya tidak terbayangkan.</p>
+                <p>Pada awal abad ke-20, relativitas Einstein merevolusi pemahaman kita tentang ruang, waktu, dan gravitasi. Persamaan medan Einstein menghubungkan kelengkungan ruang-waktu dengan distribusi materi dan energi. Persamaan ini memprediksi keberadaan lubang hitam, gelombang gravitasi, dan perluasan alam semesta, yang semuanya telah dikonfirmasi melalui pengamatan.</p>
+                <p>Di dunia kuantum, persamaan Schrödinger mendeskripsikan bagaimana keadaan kuantum berubah seiring waktu. Mekanika kuantum mengungkapen alam semesta yang probabilistik dan terkuantisasi, di mana partikel dapat berada dalam superposisi状态 dan terjerat melintasi jarak yang luas. Matematika bilangan kompleks dan ruang Hilbert sangat penting untuk memahami dunia kuantum yang aneh ini.</p>
+                <p>Model Standar fisika partikel, yang menggabungkan elektrodinamika kuantum, teori interaksi lemah, dan kromodinamika kuantum, mungkin merupakan teori ilmiah paling sukses yang pernah dikembangkan. Persamaan-persamaan Model Standar telah membuat prediksi yang sangat tepat yang telah diverifikasi melalui eksperimen, mengungkapkan alam semesta yang dibangun dari kuark, lepton, dan boson pengantar gaya.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Persamaan Fisika">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ F = G \frac{m_1 m_2}{r^2} \]</div>
+                <p class="equation-explanation">Hukum gravitasi universal Newton, yang menyatakan bahwa gaya gravitasi antara dua benda berbanding lurus dengan massa mereka dan berbanding terbalik dengan kuadrat jarak antara mereka.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu} \]</div>
+                <p class="equation-explanation">Persamaan medan Einstein dari relativitas umum, yang menghubungkan kelengkungan ruang-waktu (sisi kiri) dengan energi dan momentum (sisi kanan).</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ i\hbar \frac{\partial}{\partial t} \Psi = \hat{H} \Psi \]</div>
+                <p class="equation-explanation">Persamaan Schrödinger yang mendeskripsikan evolusi waktu fungsi gelombang dalam mekanika kuantum, di mana Ĥ adalah operator Hamiltonian yang mewakili energi total sistem.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="chaos">
+        <h2 class="section-title">Teori Chaos dan Ketidakteraturan yang Teratur</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Teori chaos mengkaji sistem yang sangat sensitif terhadap kondisi awal, di mana perubahan kecil dapat menghasilkan perbedaan besar dalam hasil jangka panjang - sebuah fenomena yang dikenal sebagai "efek kupu-kupu". Meskipun namanya, teori chaos mengungkapkan keteraturan yang mendasari dalam sistem yang tampaknya acak dan tidak terprediksi.</p>
+                <p>Sistem chaos ditemukan di seluruh alam, dari cuaca dan iklim hingga populasi ekologi dan arus turbulen. Persamaan sederhana dapat menghasilkan perilaku yang sangat kompleks ketika diiterasi, menciptakan pola fraktal yang indah seperti himpunan Mandelbrot. Perilaku deterministik ini, meskipun tidak dapat diprediksi dalam jangka panjang, mengungkapkan struktur matematika yang mendalam.</p>
+                <p>Dalam sistem tata surya, teori chaos menjelaskan mengapa prediksi jangka panjang tentang orbit planet menjadi mustahil melampaui skala waktu tertentu. Orbit Pluto, misalnya, menunjukkan perilaku chaotic pada skala waktu jutaan tahun. Ketidakstabilan ini tidak berarti bahwa tata surya akan hancur, tetapi bahwa posisi planet tertentu pada waktu yang sangat jauh di masa depan pada dasarnya tidak dapat diprediksi.</p>
+                <p>Teori chaos juga memiliki implikasi filosofis yang mendalam tentang determinisme dan kebebasan kehendak. Jika hukum fisika bersifat deterministik tetapi sistem yang mematuhinya menunjukkan perilaku yang tidak dapat diprediksi, apa artinya bagi gagasan tentang nasib atau takdir? Teori chaos menunjukkan bahwa bahkan dalam alam semesta yang diatur oleh hukum deterministik, mungkin selalu ada ruang untuk kejutan dan ketidakpastian.</p>
+                <p>Pemahaman tentang sistem chaos telah mengarah pada aplikasi praktis dalam berbagai bidang, termasuk kriptografi, prediksi cuaca, desain sirkuit elektronik, dan bahkan manajemen lalu lintas udara. Dengan mengenali pola dalam kekacauan, matematika sekali lagi mengungkapkan keteraturan yang tersembunyi di dalam kompleksitas alam.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1611915387288-fd8d2f5f928b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teori Chaos">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ x_{n+1} = r x_n (1 - x_n) \]</div>
+                <p class="equation-explanation">Peta logistik, persamaan sederhana yang menunjukkan perilaku chaos untuk nilai parameter r tertentu. Persamaan ini memodelkan pertumbuhan populasi dengan sumber daya terbatas.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \lambda = \lim_{t \to \infty} \lim_{\delta_0 \to 0} \frac{1}{t} \ln \frac{|\delta(t)|}{|\delta_0|} \]</div>
+                <p class="equation-explanation">Eksponen Lyapunov, yang mengukur tingkat pemisahan eksponensial trajectories yang berdekatan dalam ruang fase. Nilai positif menunjukkan chaos.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \frac{dx}{dt} = \sigma(y - x) \]</div>
+                <div class="equation">\[ \frac{dy}{dt} = x(\rho - z) - y \]</div>
+                <div class="equation">\[ \frac{dz}{dt} = xy - \beta z \]</div>
+                <p class="equation-explanation">Persamaan Lorenz, sistem persamaan diferensial yang memodelkan konveksi atmosfer dan menunjukkan perilaku chaos untuk parameter tertentu. Sistem ini adalah ikon teori chaos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="simetri">
+        <h2 class="section-title">Simetri dan Hukum Kekekalan</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Dalam fisika, simetri memainkan peran fundamental melalui teorema Noether, yang menyatakan bahwa setiap simetri dalam sistem fisik berhubungan dengan hukum kekekalan. Simetri translasi waktu berkorespondensi dengan kekekalan energi, simetri translasi ruang dengan kekekalan momentum, dan simetri rotasi dengan kekekalan momentum sudut.</p>
+                <p>Simetri gauge adalah konsep sentral dalam fisika modern, khususnya dalam Model Standar fisika partikel. Simetri gauge U(1) menjelaskan elektrodinamika kuantum, sementara simetri SU(3) mendasari kromodinamika kuantum yang menggambarkan interaksi kuat. Simetri SU(2)×U(1) menggambarkan interaksi elektrolemah sebelum pemecahan simetri spontan.</p>
+                <p>Pemecahan simetri spontan adalah mekanisme penting dalam fisika yang menjelaskan mengapa keadaan dasar sistem mungkin memiliki simetri yang lebih rendah daripada hukum yang mengaturnya. Mekanisme Higgs adalah contoh terkenal di mana pemecahan simetri spontan dari medan Higgs memberikan massa pada partikel elementer.</p>
+                <p>Supersimetri adalah teori ekstensi Model Standar yang mengusulkan hubungan simetri antara fermion dan boson. Meskipun belum dikonfirmasi secara eksperimental, supersimetri menarik karena menyelesaikan beberapa masalah teoretis dan menyediakan kandidat untuk materi gelap.</p>
+                <p>Simetri juga muncul dalam kristalografi melalui kelompok ruang, yang mengklasifikasikan susunan simetri periodik dalam kristal. Ada 230 kelompok ruang berbeda dalam tiga dimensi, masing-masing menggambarkan jenis simetri kristal yang unik. Klasifikasi ini memiliki aplikasi penting dalam ilmu material dan kimia padat.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1535556116002-6281ff3e9f36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Simetri dalam Alam">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} = 0 \]</div>
+                <p class="equation-explanation">Persamaan Euler-Lagrange, persamaan fundamental mekanika Lagrangian yang menghasilkan persamaan gerak untuk sistem fisik dari Lagrangian-nya.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ J^\mu = \sum_n \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_n)} \delta \phi_n - K^\mu \]</div>
+                <p class="equation-explanation">Arus Noether yang terkait dengan simetri kontinu, yang memenuhi ∂ₘJᵐ = 0, mengarah pada besaran yang kekal melalui teorema Noether.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ \mathcal{L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \bar{\psi}(i\gamma^\mu D_\mu - m)\psi \]</div>
+                <p class="equation-explanation">Lagrangian untuk elektrodinamika kuantum, yang invarian di bawah transformasi gauge U(1), menggambarkan interaksi antara foton dan partikel bermuatan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="string">
+        <h2 class="section-title">Teori String dan Dimensi Tambahan</h2>
+        <div class="content-wrapper">
+            <div class="text-content">
+                <p>Teori string adalah kerangka teoretis yang berusaha menyatukan mekanika kuantum dengan relativitas umum dengan mempostulatkan bahwa partikel fundamental bukanlah titik tak berdimensi, tetapi objek satu-dimensi yang disebut string. String ini bergetar pada frekuensi berbeda, dan setiap mode getaran berkorespondensi dengan partikel berbeda dengan massa dan muatan berbeda.</p>
+                <p>Salah satu prediksi mengejutkan teori string adalah bahwa alam semesta memiliki lebih dari tiga dimensi ruang. Teori string memerlukan 10 dimensi ruang-waktu untuk konsistensi matematisnya. Dimensi tambahan ini dikompaktifikasi atau "digulung" pada skala sangat kecil (sekitar panjang Planck, 10⁻³⁵ meter), yang menjelaskan mengapa kita tidak mengamatinya dalam kehidupan sehari-hari.</p>
+                <p>Teori-M adalah perluasan teori string yang menggabungkan lima teori string berbeda dan supergravitasi 11-dimensi ke dalam kerangka tunggal. Teori-M mempostulatkan keberadaan branes (objek dimensi-tinggi) di mana string dapat berakhir, dan menyarankan bahwa alam semesta kita mungkin terletak pada brane 3-dimensi dalam ruang-waktu dimensi更高.</p>
+                <p>Teori string memiliki implikasi mendalam untuk kosmologi, termasuk penjelasan potensial untuk inflasi kosmik, sifat materi gelap, dan nasib akhir alam semesta. Beberapa model memprediksi keberadaan alam semesta paralel atau multiverse, di mana konstanta fisika mungkin berbeda dari alam semesta kita.</p>
+                <p>Meskipun teori string belum dikonfirmasi secara eksperimental, ia telah memberikan wawasan matematika yang mendalam dan alat teoretis yang berguna. Teori ini terus menjadi area penelitian aktif, dengan fisikawan bekerja untuk mengembangkan prediksi yang dapat diuji dan memahami implikasi penuhnya untuk sifat realitas.</p>
+            </div>
+            <div class="visualization">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teori String">
+            </div>
+        </div>
+        <div class="equation-cards">
+            <div class="equation-card">
+                <div class="equation">\[ S = -\frac{T}{2} \int d^2\sigma \sqrt{-h} h^{\alpha\beta} \partial_\alpha X^\mu \partial_\beta X_\mu \]</div>
+                <p class="equation-explanation">Aksi Polyakov untuk string bosonik, di mana T adalah tegangan string, hαβ adalah metrik dunia-datar, dan Xᵐ adalah koordinat ruang-waktu.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ [L_m, L_n] = (m-n)L_{m+n} + \frac{c}{12}(m^3-m)\delta_{m+n,0} \]</div>
+                <p class="equation-explanation">Aljabar Virasoro, aljabar Lie dari generator konformal dalam teori string, di mana c adalah charge sentral yang merepresentasikan derajat kebebasan.</p>
+            </div>
+            <div class="equation-card">
+                <div class="equation">\[ R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R = 8\pi G \langle T_{\mu\nu} \rangle \]</div>
+                <p class="equation-explanation">Persamaan medan Einstein semiclassical, di mana ekspektasi nilai tensor energi-momentum kuantum memengaruhi kelengkungan ruang-waktu.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer>
+        <div class="credits">
+            Dikembangkan oleh V3XZZ (GitHub: V3XZZ) © 2025
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.fromTo(section, 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1, 
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.equation-card').forEach((card, i) => {
+            gsap.fromTo(card, 
+                { opacity: 0, x: i % 2 === 0 ? -50 : 50 },
+                { 
+                    opacity: 1, 
+                    x: 0, 
+                    duration: 0.8, 
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
