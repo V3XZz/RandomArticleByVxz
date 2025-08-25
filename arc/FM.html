@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filosofi Machiavellianisme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --color-dark-blue: #0a0e2a;
+            --color-deep-purple: #1a1f4d;
+            --color-neon-cyan: #00f3ff;
+            --color-bright-pink: #ff2a6d;
+            --color-light-purple: #6c63ff;
+            --color-text: #ffffff;
+            --color-text-secondary: #d1d1d1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--color-dark-blue), var(--color-deep-purple));
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 42, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--color-neon-cyan), var(--color-bright-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--color-neon-cyan), var(--color-bright-pink));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-neon-cyan);
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-bright-pink));
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            background: url('https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 42, 0.7);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--color-neon-cyan), var(--color-bright-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--color-text-secondary);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--color-neon-cyan), var(--color-bright-pink));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 243, 255, 0.5);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-neon-cyan);
+            display: inline-block;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-visual {
+            position: relative;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .content-visual:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .content-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(26, 31, 77, 0.8), rgba(10, 14, 42, 0.8));
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-neon-cyan);
+        }
+
+        .card p {
+            color: var(--color-text-secondary);
+        }
+
+        .formula-card {
+            background: rgba(10, 14, 42, 0.6);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--color-bright-pink);
+        }
+
+        .formula-title {
+            font-size: 1.2rem;
+            color: var(--color-neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .formula-equation {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-bright-pink);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .formula-explanation {
+            color: var(--color-text-secondary);
+        }
+
+        .sources {
+            background: rgba(10, 14, 42, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .sources h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-neon-cyan);
+        }
+
+        .sources ul {
+            list-style: none;
+        }
+
+        .sources li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-text-secondary);
+        }
+
+        .sources li:before {
+            content: '•';
+            color: var(--color-bright-pink);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .references {
+            background: linear-gradient(135deg, rgba(26, 31, 77, 0.8), rgba(10, 14, 42, 0.8));
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 4rem;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .references h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-neon-cyan);
+            text-align: center;
+        }
+
+        .reference-category {
+            margin-bottom: 2rem;
+        }
+
+        .reference-category h3 {
+            font-size: 1.5rem;
+            color: var(--color-bright-pink);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-neon-cyan);
+        }
+
+        .reference-list {
+            list-style: none;
+        }
+
+        .reference-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(10, 14, 42, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .reference-list li:hover {
+            background: rgba(10, 14, 42, 0.7);
+            transform: translateX(5px);
+        }
+
+        .reference-list a {
+            color: var(--color-neon-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-list a:hover {
+            color: var(--color-bright-pink);
+            text-decoration: underline;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--color-neon-cyan), var(--color-bright-pink));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 243, 255, 0.7);
+        }
+
+        footer {
+            background: var(--color-dark-blue);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .developer-credit {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .developer-credit a {
+            color: var(--color-neon-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .developer-credit a:hover {
+            color: var(--color-bright-pink);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(10, 14, 42, 0.95);
+                backdrop-filter: blur(10px);
+                width: 80%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                transition: all 0.5s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .formula-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .formula-equation {
+                text-align: left;
+            }
+        }
+
+        .section-container {
+            background: linear-gradient(135deg, rgba(26, 31, 77, 0.7), rgba(10, 14, 42, 0.7));
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">Machiavellianisme</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#pengantar">Pengantar</a></li>
+                <li><a href="#biografi">Biografi</a></li>
+                <li><a href="#pemikiran">Pemikiran</a></li>
+                <li><a href="#konsep">Konsep Utama</a></li>
+                <li><a href="#virtu-fortuna">Virtù & Fortuna</a></li>
+                <li><a href="#pengaruh">Pengaruh</a></li>
+                <li><a href="#kritik">Kritik</a></li>
+                <li><a href="#psikologi">Psikologi</a></li>
+                <li><a href="#modern">Relevansi Modern</a></li>
+                <li><a href="#warisan">Warisan</a></li>
+                <li><a href="#sumber">Sumber</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Filosofi Machiavellianisme</h1>
+            <p>Eksplorasi mendalam tentang pemikiran Niccolò Machiavelli dan pengaruhnya dalam politik, psikologi, dan masyarakat modern</p>
+            <a href="#pengantar" class="hero-btn">Jelajahi Sekarang <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <main>
+        <section id="pengantar">
+            <div class="section-container">
+                <h2 class="section-title">Pengantar Machiavellianisme</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Machiavellianisme adalah filsafat politik yang dikemukakan oleh Niccolò Machiavelli pada abad ke-16, terutama melalui karya besarnya, <em>Il Principe</em> (Sang Pangeran). Filsafat ini berfokus pada konsep bahwa tujuan menghalalkan cara, khususnya dalam konteks pemerintahan dan kekuasaan politik.</p>
+                        <p>Istilah "Machiavellian" sering digunakan secara pejoratif untuk menggambarkan tindakan manipulatif dan tidak bermoral dalam politik. Namun, pemikiran Machiavelli sebenarnya lebih kompleks dan bernuansa daripada sekadar pembenaran untuk tindakan kejam tanpa prinsip.</p>
+                        <p>Machiavellianisme mengeksplorasi hubungan antara moralitas dan kekuasaan, menantang pandangan tradisional tentang pemerintahan yang virtuos dan mengusulkan pendekatan yang lebih realistis terhadap politik.</p>
+                        <p>Dalam konteks sejarah, Machiavellianisme muncul selama Renaissance Italia, periode ketika negara-kota Italia seperti Florence, Venice, dan Milan terlibat dalam persaingan sengit dan perebutan kekuasaan. Konteks ini penting untuk memahami mengapa Machiavelli mengembangkan pandangan yang begitu pragmatis tentang kekuasaan.</p>
+                        <p>Machiavelli sering dilihat sebagai bapak realisme politik, sebuah aliran pemikiran yang menekankan pada peran kekuasaan, kepentingan diri, dan konflik dalam hubungan politik. Realisme Machiavellian berbeda dengan idealisme politik yang berfokus pada bagaimana seharusnya dunia politik beroperasi menurut prinsip-prinsip moral.</p>
+                        <p>Karya Machiavelli, khususnya <em>Il Principe</em>, ditulis sebagai panduan praktis untuk penguasa, berisi nasihat tentang bagaimana memperoleh dan mempertahankan kekuasaan. Buku ini didedikasikan untuk Lorenzo de' Medici, dengan harapan bahwa Machiavelli bisa mendapatkan posisi di pemerintahan Medici.</p>
+                        <p>Meskipun sering dikaitkan dengan tipu daya dan kekejaman, Machiavelli juga menekankan pentingnya kebajikan pemimpin, meskipun dalam pengertian yang berbeda dari konsep tradisional. Virtù Machiavellian mengacu pada kualitas seperti kecerdasan, kekuatan, ketegasan, dan kemampuan beradaptasi yang diperlukan untuk menghadapi perubahan keadaan (fortuna).</p>
+                        <p>Pemikiran Machiavelli tentang republik dan kebebasan sipil juga penting, meskipun sering diabaikan. Dalam <em>Discourses on Livy</em>, ia mengungkapkan preferensi untuk pemerintahan republik yang stabil di mana warga negara dapat menikmati kebebasan tertentu, asalkan mereka menjalankan kewajiban sipil mereka.</p>
+                        <p>Dalam psikologi modern, Machiavellianisme adalah salah satu dari tiga sifat dalam "Triad Gelap" (Dark Triad) kepribadian, bersama dengan narsisme dan psikopati. Individu dengan skor tinggi dalam Machiavellianisme cenderung manipulatif, berorientasi pada diri sendiri, dan pragmatis secara moral.</p>
+                        <p>Pemikiran Machiavelli terus relevan dalam dunia modern, mempengaruhi bidang-bidang seperti teori hubungan internasional, ilmu politik, kepemimpinan bisnis, dan strategi militer. Karyanya terus dipelajari dan diperdebatkan oleh para sarjana, politisi, dan filsuf.</p>
+                    </div>
+                    <div class="content-visual">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Visualisasi Machiavellianisme">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="biografi">
+            <div class="section-container">
+                <h2 class="section-title">Biografi Niccolò Machiavelli</h2>
+                <div class="content-grid">
+                    <div class="content-visual">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Potret Niccolò Machiavelli">
+                    </div>
+                    <div class="content-text">
+                        <p>Niccolò di Bernardo dei Machiavelli (3 Mei 1469 - 21 Juni 1527) adalah diplomat, filsuf, politikus, dan penulis asal Italia yang menjabat sebagai pejabat tinggi di Republik Florence. Ia sering disebut sebagai bapak pendiri ilmu politik modern.</p>
+                        <p>Machiavelli lahir di Florence, Italia, pada masa Renaissance. Ayahnya adalah pengacara yang berasal dari keluarga terpelajar namun tidak kaya. Meskipun detail pendidikan awalnya tidak banyak diketahui, tulisan-tulisannya menunjukkan pemahaman mendalam tentang filsafat klasik, sejarah, dan sastra.</p>
+                        <p>Pada 1498, Machiavelli diangkat sebagai kepala Kanselir Kedua Republik Florence, posisi yang memberinya kesempatan untuk melakukan misi diplomatik kepada berbagai penguasa Eropa, termasuk Raja Louis XII dari Prancis dan Paus Julius II.</p>
+                        <p>Pengalaman diplomatiknya memberikan wawasan berharga tentang cara kerja kekuasaan politik dan perilaku penguasa. Ia mengamati langsung bagaimana para pemimpin membuat keputusan, bernegosiasi, dan menggunakan kekuatan untuk mencapai tujuan mereka.</p>
+                        <p>Ketika keluarga Medici kembali berkuasa di Florence pada 1512, Machiavelli dipecat dari jabatannya dan dituduh terlibat dalam konspirasi melawan penguasa baru. Ia dipenjara dan disiksa, tetapi akhirnya dibebaskan dan diasingkan ke perkebunan keluarganya di Sant'Andrea in Percussina.</p>
+                        <p>Selama masa pengasingan inilah Machiavelli menulis karya-karya terpentingnya, termasuk <em>Il Principe</em> (1513) dan <em>Discourses on Livy</em> (1517). Karya-karya ini merefleksikan pengalamannya dalam politik dan pengamatannya tentang sifat kekuasaan.</p>
+                        <p>Machiavelli menghabiskan tahun-tahun terakhir hidupnya dengan menulis dan sesekali terlibat dalam urusan politik Florence. Ia meninggal pada 21 Juni 1527 pada usia 58 tahun dan dimakamkan di Basilica of Santa Croce di Florence.</p>
+                        <p>Warisan intelektual Machiavelli sangat luas. Karyanya telah memengaruhi banyak pemikir politik, dari para teoretisi Renaissance hingga para filsuf Pencerahan dan pemikir modern. Meskipun often disalahtafsirkan, pemikirannya terus relevan dalam diskusi tentang kekuasaan, moralitas, dan politik.</p>
+                        <p>Machiavelli juga menulis karya-karya lainnya, termasuk <em>The Art of War</em> (1521), <em>Florentine Histories</em> (1525), dan beberapa drama dan puisi. Karya-karya ini menunjukkan keahliannya yang luas dalam berbagai bidang dan minatnya yang mendalam terhadap politik, sejarah, dan budaya.</p>
+                        <p>Pemikiran Machiavelli tentang manusia dan masyarakat didasarkan pada pengamatan empiris daripada spekulasi filosofis. Ia sering menggunakan contoh-contoh sejarah, terutama dari Romawi Kuno, untuk mendukung argumennya tentang bagaimana seharusnya negara diperintah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pemikiran">
+            <div class="section-container">
+                <h2 class="section-title">Pemikiran Inti Machiavellianisme</h2>
+                <div class="content-text">
+                    <p>Pemikiran Machiavelli didasarkan pada pengamatan realistis terhadap perilaku manusia dan kekuasaan politik. Berbeda dengan pemikir politik sebelumnya yang sering berfokus pada bagaimana seharusnya negara dijalankan, Machiavelli berkonsentrasi pada bagaimana negara benar-benar dijalankan.</p>
+                    
+                    <div class="formula-card">
+                        <div class="formula-title">Realisme Politik</div>
+                        <div class="formula-content">
+                            <div class="formula-equation">Realitas > Idealisme</div>
+                            <div class="formula-explanation">Machiavelli menekankan bahwa pemimpin harus berurusan dengan realitas sebagaimana adanya, bukan sebagaimana seharusnya. Tindakan politik harus didasarkan pada pemahaman tentang sifat manusia yang sesungguhnya, yang menurut Machiavelli pada dasarnya mementingkan diri sendiri, tidak dapat dipercaya, dan mudah berubah.</div>
+                        </div>
+                    </div>
+                    
+                    <p>Machiavelli menolak pendekatan idealis terhadap politik yang umum pada masanya. Alih-alih berfokus pada bagaimana seharusnya penguasa berperilaku menurut standar moral tradisional, ia menganalisis bagaimana penguasa benar-benar berperilaku untuk mempertahankan kekuasaan mereka.</p>
+                    
+                    <div class="formula-card">
+                        <div class="formula-title">Pemisahan Moral dan Politik</div>
+                        <div class="formula-content">
+                            <div class="formula-equation">Kekuasaan ≠ Moralitas</div>
+                            <div class="formula-explanation">Machiavelli berargumen bahwa moralitas pribadi dan moralitas politik adalah dua hal yang berbeda. Seorang pemimpin mungkin perlu melakukan tindakan yang secara moral dipertanyakan jika tindakan tersebut diperlukan untuk menjaga stabilitas dan keamanan negara.</div>
+                        </div>
+                    </div>
+                    
+                    <p>Bagi Machiavelli, penguasa yang efektif harus siap melakukan tindakan yang mungkin dianggap kejam atau tidak bermoral jika diperlukan untuk mempertahankan kekuasaan dan stabilitas negara. Namun, ini tidak berarti bahwa ia menganjurkan kekejaman tanpa tujuan atau kesewenang-wenangan.</p>
+                    
+                    <div class="formula-card">
+                        <div class="formula-title">Tujuan Menghalalkan Cara</div>
+                        <div class="formula-content">
+                            <div class="formula-equation">Tujuan → Cara</div>
+                            <div class="formula-explanation">Konsep paling terkenal dari Machiavelli adalah bahwa hasil akhir yang baik membenarkan cara yang digunakan untuk mencapainya. Dalam konteks politik, pemeliharaan kekuasaan dan stabilitas negara dapat membenarkan tindakan yang kejam atau tidak bermoral.</div>
+                        </div>
+                    </div>
+                    
+                    <p>Machiavelli percaya bahwa penguasa harus dinilai berdasarkan keberhasilannya dalam mempertahankan kekuasaan dan stabilitas negara, bukan berdasarkan kesesuaiannya dengan standar moral tradisional. Tujuan utama penguasa haruslah kesejahteraan dan keamanan negara, dan ia harus menggunakan cara apa pun yang diperlukan untuk mencapai tujuan ini.</p>
+                    
+                    <p>Pemikiran Machiavelli tentang kekuasaan juga mencakup pentingnya persepsi dan penampilan. Ia menekankan bahwa penguasa harus tampak berbelas kasih, setia, manusiawi, jujur, dan religius, tetapi juga harus siap untuk tidak menjadi demikian ketika keadaan menuntutnya.</p>
+                    
+                    <p>Machiavelli juga membahas pentingnya kekuatan militer dalam politik. Ia berargumen bahwa penguasa harus bergantung pada tentara sendiri daripada tentara bayaran, karena tentara bayaran tidak dapat diandalkan dan mungkin berbalik melawan penguasa yang mempekerjakan mereka.</p>
+                    
+                    <p>Pemikiran Machiavelli tentang hubungan antara penguasa dan rakyat juga penting. Ia menekankan bahwa penguasa harus menghindari kebencian rakyat, karena meskipun ditakuti lebih baik daripada dicintai, kebencian rakyat dapat menyebabkan kejatuhan penguasa.</p>
+                    
+                    <p>Machiavelli juga membedakan antara pemerintahan yang didasarkan pada konsensus dan pemerintahan yang didasarkan pada paksaan. Ia mengakui bahwa pemerintahan yang didasarkan pada konsensus lebih stabil, tetapi juga mengakui bahwa dalam beberapa keadaan, paksaan mungkin diperlukan.</p>
+                    
+                    <p>Pemikiran Machiavelli tentang perubahan politik dan sejarah juga penting. Ia melihat sejarah sebagai siklus kejayaan dan kemunduran, dan percaya bahwa penguasa yang bijaksana dapat belajar dari pola-pola sejarah untuk mengantisipasi dan mengatasi tantangan.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="konsep">
+            <div class="section-container">
+                <h2 class="section-title">Konsep-Konsep Utama</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Virtù</h3>
+                        <p>Kualitas kepemimpinan yang mencakup kecerdasan, kekuatan, keberanian, dan kemampuan beradaptasi yang diperlukan untuk mengatasi keadaan yang berubah-ubah. Virtù bukanlah "kebajikan" dalam pengertian moral tradisional, tetapi lebih mengacu pada kualitas yang memungkinkan individu untuk mengendalikan nasib mereka sendiri dan mencapai kesuksesan politik.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Fortuna</h3>
+                        <p>Kekuatan tak terduga yang mengontrol sebagian besar kehidupan manusia, sering digambarkan sebagai dewi keberuntungan yang berubah-ubah. Machiavelli menggambarkan fortuna sebagai sungai yang deras yang dapat menyebabkan banjir yang menghancurkan, tetapi dengan persiapan yang tepat (virtù), manusia dapat membangun bendungan dan saluran untuk mengendalikan kekuatannya.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Ketakutan vs Cinta</h3>
+                        <p>Machiavelli berargumen bahwa lebih baik bagi penguasa untuk ditakuti daripada dicintai, karena ketakutan lebih konsisten dan dapat diandalkan daripada cinta. Namun, ia juga memperingatkan bahwa penguasa harus menghindari kebencian, yang dapat menyebabkan kejatuhannya.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Realisme Politik</h3>
+                        <p>Pendekatan terhadap politik yang berfokus pada realitas sebagaimana adanya, bukan sebagaimana seharusnya. Realisme politik Machiavelli menekankan peran kekuasaan, kepentingan diri, dan konflik dalam hubungan politik.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Raison d'État</h3>
+                        <p>Konsep bahwa kepentingan negara dapat membenarkan tindakan yang mungkin dianggap tidak bermoral dalam konteks lain. Machiavelli adalah salah satu pemikir awal yang mengembangkan konsep ini, yang menjadi fondasi bagi realisme politik modern.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Kekuatan dan Kekuasaan</h3>
+                        <p>Machiavelli menekankan pentingnya kekuatan dalam politik, baik kekuatan militer maupun kekuatan politik. Ia berargumen bahwa penguasa harus memiliki kekuatan yang cukup untuk mempertahankan kekuasaannya dan melindungi negara dari ancaman internal dan eksternal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="virtu-fortuna">
+            <div class="section-container">
+                <h2 class="section-title">Virtù dan Fortuna</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Dua konsep sentral dalam pemikiran Machiavelli adalah <em>virtù</em> dan <em>fortuna</em>. Konsep-konsep ini menggambarkan interaksi antara keagenan manusia dan kekuatan di luar kendalinya.</p>
+                        <p><strong>Virtù</strong> (diucapkan "vir-too") bukanlah "kebajikan" dalam pengertian moral tradisional, tetapi lebih mengacu pada kualitas yang memungkinkan individu untuk mengendalikan nasib mereka sendiri dan mencapai kesuksesan politik. Ini mencakup kecerdasan, kekuatan, ketegasan, dan kemampuan beradaptasi.</p>
+                        <p>Machiavelli menggunakan istilah virtù untuk menggambarkan kualitas yang diperlukan untuk menghadapi tantangan politik dan mengatasi perubahan keadaan. Virtù mencakup kemampuan untuk memahami realitas politik, membuat keputusan yang tepat, dan mengambil tindakan yang efektif.</p>
+                        <p>Virtù juga mencakup kemampuan untuk beradaptasi dengan perubahan keadaan. Machiavelli menekankan bahwa penguasa harus fleksibel dan mampu menyesuaikan kebijakannya dengan perubahan kondisi, karena keadaan yang berubah memerlukan respons yang berbeda.</p>
+                        <p><strong>Fortuna</strong> mewakili unsur ketidakpastian dan perubahan dalam urusan manusia. Machiavelli menggambarkannya sebagai sungai yang deras yang dapat menyebabkan banjir yang menghancurkan, tetapi dengan persiapan yang tepat (virtù), manusia dapat membangun bendungan dan saluran untuk mengendalikan kekuatannya.</p>
+                        <p>Machiavelli melihat fortuna sebagai kekuatan yang mengontrol sekitar setengah dari urusan manusia, sementara setengah lainnya dikontrol oleh virtù. Penguasa yang memiliki virtù yang cukup dapat mengatasi tantangan yang ditimbulkan oleh fortuna dan bahkan memanfaatkannya untuk keuntungan mereka.</p>
+                        <p>Bagi Machiavelli, hubungan antara virtù dan fortuna adalah dialektis. Virtù memungkinkan penguasa untuk mengantisipasi dan merespons perubahan yang dibawa oleh fortuna, sementara fortuna menciptakan peluang dan tantangan yang memerlukan virtù untuk mengelolanya.</p>
+                        <p>Machiavelli menggunakan metafora fortuna sebagai wanita yang dapat dikendalikan dengan kekerasan dan semangat. Metafora ini mencerminkan pandangannya bahwa fortuna dapat "dikuasai" oleh mereka yang cukup berani dan tegas untuk menghadapinya.</p>
+                        <p>Pemikiran Machiavelli tentang virtù dan fortuna memiliki implikasi penting untuk pemahaman kita tentang agency manusia dan determinisme. Meskipun ia mengakui peran fortuna dalam urusan manusia, ia juga menekankan bahwa manusia memiliki kemampuan untuk mengendalikan nasib mereka sendiri melalui virtù.</p>
+                        <p>Konsep virtù dan fortuna juga relevan untuk pemahaman kita tentang kepemimpisan dan kesuksesan politik. Machiavelli berargumen bahwa penguasa yang sukses adalah mereka yang memiliki virtù yang cukup untuk mengatasi tantangan yang ditimbulkan oleh fortuna dan memanfaatkan peluang yang diciptakannya.</p>
+                    </div>
+                    <div class="content-visual">
+                        <img src="https://images.unsplash.com/photo-1579547621700-03c2c337370a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1378&q=80" alt="Visualisasi Virtù dan Fortuna">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pengaruh">
+            <div class="section-container">
+                <h2 class="section-title">Pengaruh Machiavellianisme</h2>
+                <div class="content-text">
+                    <p>Pemikiran Machiavelli telah memengaruhi berbagai bidang, termasuk politik, filsafat, sastra, dan psikologi. Karyanya telah menginspirasi baik pujian maupun kritik selama berabad-abad.</p>
+                    
+                    <div class="card-container">
+                        <div class="card">
+                            <h3>Politik Modern</h3>
+                            <p>Machiavelli dianggap sebagai bapak ilmu politik modern karena pendekatan empiris dan realistisnya terhadap kekuasaan politik. Pemikirannya memengaruhi perkembangan realisme politik, baik dalam teori politik domestik maupun hubungan internasional.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Filsafat Politik</h3>
+                            <p>Pemikir seperti Hobbes, Rousseau, dan Nietzsche terpengaruh oleh karya Machiavelli, meskipun dengan interpretasi yang berbeda. Hobbes mengembangkan pandangan pesimisnya tentang sifat manusia sebagian karena pengaruh Machiavelli.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Sastra</h3>
+                            <p>Karakter Machiavellian muncul dalam banyak karya sastra, seperti Richard III Shakespeare dan The Prince dalam The Little Prince. Karya Machiavelli juga memengaruhi penulis seperti Dante, Marlowe, dan Brecht.</p>
+                        </div>
+                    </div>
+                    
+                    <p>Pengaruh Machiavelli pada Renaissance Italia tidak dapat dilebih-lebihkan. Pemikirannya merefleksikan dan membentuk cara baru dalam memandang politik dan kekuasaan selama periode ini. Ia adalah bagian dari gerakan humanis Renaissance yang berfokus pada pengalaman manusia dan duniawi, bukan pada pertimbangan agama dan supernatural.</p>
+                    
+                    <p>Dalam hubungan internasional, pemikiran Machiavelli memengaruhi perkembangan realisme, salah satu aliran teori hubungan internasional yang paling penting. Realis seperti Hans Morgenthau dan Henry Kissinger mengakui pengaruh Machiavelli pada pemikiran mereka tentang peran kekuasaan dan kepentingan nasional dalam politik internasional.</p>
+                    
+                    <p>Machiavelli juga memengaruhi perkembangan konsep raison d'état (alasan negara), yang berargumen bahwa kepentingan negara dapat membenarkan tindakan yang mungkin dianggap tidak bermoral dalam konteks lain. Konsep ini menjadi fondasi bagi negara modern dan sistem internasional.</p>
+                    
+                    <p>Dalam bidang militer dan strategi, pemikiran Machiavelli tentang perang dan kekuatan militer memengaruhi para pemikir militer seperti Carl von Clausewitz, yang mengembangkan teori perangnya sebagian sebagai tanggapan terhadap pemikiran Machiavelli.</p>
+                    
+                    <p>Pengaruh Machiavelli juga terlihat dalam perkembangan teori kepemimpinan dan manajemen. Konsep-konsepnya tentang virtù, fortuna, dan hubungan antara penguasa dan rakyat telah diterapkan dalam konteks kepemimpinan bisnis dan organisasi.</p>
+                    
+                    <p>Dalam seni dan budaya, Machiavelli telah menjadi simbol tipu daya politik dan ketiadaan moral. Istilah "Machiavellian" digunakan untuk menggambarkan tindakan manipulatif dan tidak bermoral dalam politik dan kehidupan sehari-hari.</p>
+                    
+                    <p>Pemikiran Machiavelli juga memengaruhi perkembangan historiografi modern. Pendekatannya terhadap sejarah, yang berfokus pada pola-pola dan pelajaran praktis daripada narasi moral atau agama, memengaruhi cara sejarawan modern mempelajari dan menulis tentang masa lalu.</p>
+                    
+                    <p>Meskipun sering dikritik dan disalahtafsirkan, warisan Machiavelli tetap kuat. Karyanya terus dipelajari dan diperdebatkan, dan pemikirannya terus relevan untuk memahami politik dan kekuasaan dalam dunia modern.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="kritik">
+            <div class="section-container">
+                <h2 class="section-title">Kritik terhadap Machiavellianisme</h2>
+                <div class="content-grid">
+                    <div class="content-visual">
+                        <img src="https://images.unsplash.com/photo-1614624532983-1fe21c1d1d41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80" alt="Kritik terhadap Machiavellianisme">
+                    </div>
+                    <div class="content-text">
+                        <p>Sejak publikasinya, karya Machiavelli telah menuai kontroversi dan kritik. Gereja Katolik memasukkan bukunya dalam Daftar Buku yang Dilarang (Index Librorum Prohibitorum), dan istilah "Machiavellian" menjadi sinonim untuk penipuan, manipulasi, dan ketiadaan moral.</p>
+                        <p>Kritik utama terhadap Machiavellianisme termasuk:</p>
+                        <ul>
+                            <li>Pembenaran terhadap tirani dan pemerintahan otoriter</li>
+                            <li>Pemisahan politik dari etika yang berpotensi berbahaya</li>
+                            <li>Pandangan sinis tentang sifat manusia</li>
+                            <li>Pengabaian terhadap hak-hak individu demi kepentingan negara</li>
+                        </ul>
+                        <p>Para kritikus berargumen bahwa pemisahan Machiavelli antara politik dan moralitas dapat membenarkan tindakan yang kejam dan tidak bermoral, dan bahwa penekanannya pada kekuasaan dan kepentingan diri dapat mengikis fondasi moral masyarakat.</p>
+                        <p>Beberapa kritikus juga menuduh Machiavelli mengadvokasi tipu daya dan pengkhianatan sebagai alat politik yang sah. Mereka menunjukkan bahwa nasihatnya untuk penguasa untuk "menjadi singa dan rubah" dapat diinterpretasikan sebagai pembenaran untuk ketidakjujuran dan manipulasi.</p>
+                        <p>Kritik lain terhadap Machiavelli adalah bahwa pandangannya tentang sifat manusia terlalu pesimis dan sinis. Dengan menggambarkan manusia sebagai "tidak tahu terima kasih, tidak konsisten, berpura-pura, takut akan bahaya, dan serakah akan keuntungan," ia mengabaikan kapasitas manusia untuk altruisme, kerjasama, dan moralitas.</p>
+                        <p>Para pemikir humanis dan liberal juga mengkritik Machiavelli karena mengabaikan hak-hak individu dan kebebasan sipil. Mereka berargumen bahwa penekanannya pada kekuasaan negara dan stabilitas dapat mengarah pada penindasan terhadap individu dan minoritas.</p>
+                        <p>Beberapa kritikus agama menuduh Machiavelli sebagai ateis atau anti-agama, karena ia melihat agama terutama sebagai alat politik untuk mengontrol massa, bukan sebagai keyakinan yang tulus. Namun, lainnya berargumen bahwa Machiavelli tidak menentang agama itu sendiri, tetapi hanya penyalahgunaannya untuk tujuan politik.</p>
+                        <p>Para feminis juga mengkritik Machiavelli karena pandangannya yang maskulin tentang kekuasaan dan politik. Mereka menunjuk pada metaforanya tentang fortuna sebagai wanita yang perlu "dikuasai" dengan kekerasan dan semangat sebagai contoh dari pandangannya yang misoginis.</p>
+                        <p>Namun, beberapa sarjana berargumen bahwa kritik ini didasarkan pada pembacaan yang terlalu sederhana terhadap karya Machiavelli. Mereka menunjukkan bahwa dalam Discourses on Livy, Machiavelli mengungkapkan preferensi untuk pemerintahan republik dan kebebasan sipil.</p>
+                        <p>Para pembela Machiavelli juga berargumen bahwa ia bukanlah seorang amoralis, tetapi seorang realis yang mencoba menggambarkan politik sebagaimana adanya, bukan sebagaimana seharusnya. Mereka menekankan bahwa nasihatnya untuk penguasa dimaksudkan untuk membantu mereka mempertahankan kekuasaan dan stabilitas dalam dunia yang berbahaya dan tidak pasti.</p>
+                        <p>Terlepas dari kritik ini, warisan Machiavelli tetap kuat, dan karyanya terus dipelajari dan diperdebatkan oleh para sarjana, politisi, dan filsuf. Pemikirannya menantang kita untuk mempertimbangkan hubungan yang kompleks antara moralitas dan kekuasaan, dan untuk menghadapi realitas politik yang sering tidak menyenangkan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="psikologi">
+            <div class="section-container">
+                <h2 class="section-title">Machiavellianisme dalam Psikologi</h2>
+                <div class="content-text">
+                    <p>Dalam psikologi, Machiavellianisme adalah salah satu dari tiga sifat kepribadian dalam "Triad Gelap" (Dark Triad), bersama dengan narsisme dan psikopati. Individu dengan skor tinggi dalam Machiavellianisme cenderung:</p>
+                    
+                    <div class="card-container">
+                        <div class="card">
+                            <h3>Manipulatif</h3>
+                            <p>Menggunakan taktik manipulasi untuk mencapai tujuan pribadi, termasuk kebohongan, penipuan, dan eksploitasi orang lain.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Berorientasi pada Diri Sendiri</h3>
+                            <p>Memprioritaskan kepentingan sendiri di atas orang lain, dan cenderung memandang hubungan interpersonal dalam hal keuntungan yang dapat diperoleh.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Pragmatis secara Moral</h3>
+                            <p>Bersedia melanggar norma moral jika menguntungkan mereka, dan cenderung melihat moralitas sebagai kendala daripada pedoman.</p>
+                        </div>
+                    </div>
+                    
+                    <p>Skala Mach-IV, yang dikembangkan oleh Richard Christie dan Florence Geis, adalah alat pengukuran yang umum digunakan untuk menilai tingkat Machiavellianisme seseorang. Skala ini mengukur sejauh mana seseorang setuju dengan pernyataan seperti "Cara terbaik untuk menangani orang adalah dengan mengatakan apa yang ingin mereka dengar" dan "Kebanyakan orang pada dasarnya baik dan baik hati".</p>
+                    
+                    <p>Penelitian psikologis telah menemukan bahwa individu dengan skor tinggi dalam Machiavellianisme cenderung lebih sukses dalam bidang-bidang yang memerlukan persuasi dan manipulasi, seperti penjualan, politik, dan hukum. Namun, mereka juga cenderung memiliki hubungan interpersonal yang lebih buruk dan tingkat kepercayaan yang lebih rendah.</p>
+                    
+                    <p>Machiavellianisme dalam psikologi berbeda dari konsep filosofis Machiavellianisme dalam beberapa hal. Sementara Machiavelli sendiri membahas perilaku penguasa dalam konteks politik, psikologi Machiavellianisme berfokus pada kecenderungan individu untuk memanipulasi dan mengeksploitasi orang lain dalam berbagai konteks, termasuk hubungan interpersonal sehari-hari.</p>
+                    
+                    <p>Penelitian juga menunjukkan bahwa Machiavellianisme berkorelasi dengan ciri-ciri kepribadian lainnya, seperti kurangnya empati, kecurigaan terhadap orang lain, dan fokus pada tujuan jangka pendek daripada hubungan jangka panjang. Individu dengan skor tinggi dalam Machiavellianisme cenderung melihat orang lain sebagai alat untuk mencapai tujuan mereka sendiri.</p>
+                    
+                    <p>Dalam konteks organisasi, Machiavellianisme dapat memiliki konsekuensi baik positif maupun negatif. Di satu sisi, individu Machiavellian mungkin lebih efektif dalam negosiasi dan manuver politik organisasi. Di sisi lain, mereka mungkin merusak kepercayaan dan kerjasama dalam tim, dan terlibat dalam perilaku tidak etis yang dapat merugikan organisasi.</p>
+                    
+                    <p>Beberapa penelitian telah mengeksplorasi dasar neurologis dari Machiavellianisme. Studi-studi ini menemukan bahwa individu dengan skor tinggi dalam Machiavellianisme cenderung memiliki aktivitas yang berbeda di daerah otak yang terkait dengan pemrosesan emosi, pengambilan keputusan moral, dan teori pikiran (kemampuan untuk memahami keadaan mental orang lain).</p>
+                    
+                    <p>Penting untuk dicatat bahwa Machiavellianisme dalam psikologi adalah suatu spektrum, bukan kategori yang tetap. Kebanyakan orang menunjukkan beberapa tingkat Machiavellianisme dalam perilaku mereka, dan konteks situasional dapat mempengaruhi sejauh mana kecenderungan ini diekspresikan.</p>
+                    
+                    <p>Penelitian tentang Machiavellianisme juga telah mengeksplorasi hubungannya dengan hasil kehidupan yang berbeda. Beberapa studi menemukan bahwa individu dengan skor tinggi dalam Machiavellianisme cenderung memiliki pendapatan yang lebih tinggi dan lebih sukses secara profesional, tetapi juga cenderung memiliki kepuasan hidup yang lebih rendah dan lebih banyak konflik interpersonal.</p>
+                    
+                    <p>Pemahaman tentang Machiavellianisme dalam psikologi terus berkembang, dengan penelitian baru mengeksplorasi aspek-aspek seperti pengaruh budaya terhadap ekspresi Machiavellianisme, hubungannya dengan kecerdasan emosional, dan potensi intervensi untuk mengurangi efek negatifnya.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="modern">
+            <div class="section-container">
+                <h2 class="section-title">Relevansi Modern Machiavellianisme</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>Pemikiran Machiavelli tetap relevan dalam dunia modern, terutama dalam bidang politik, bisnis, dan hubungan internasional. Banyak prinsip Machiavellian dapat dilihat dalam strategi politik kontemporer, negosiasi bisnis, dan dinamika kekuasaan.</p>
+                        <p>Dalam politik modern, konsep seperti realpolitik dan realisme ofensif berhutang banyak pada pemikiran Machiavelli. Para pemimpin dunia sering menghadapi dilema Machiavellian ketika harus menyeimbangkan antara pertimbangan moral dan kebutuhan praktis pemerintahan.</p>
+                        <p>Contoh dari penerapan prinsip Machiavellian dalam politik modern termasuk penggunaan propaganda dan manipulasi media, taktik mengalihkan perhatian dari skandal, dan pembentukan aliansi yang didasarkan pada kepentingan daripada nilai-nilai bersama.</p>
+                        <p>Dalam dunia bisnis, strategi Machiavellian dapat dilihat dalam taktik negosiasi yang agresif, permainan kekuasaan korporat, dan kompetisi pasar. Buku-buku seperti "The 48 Laws of Power" oleh Robert Greene secara terang-terangan mengakui pengaruh Machiavelli.</p>
+                        <p>Eksekutif bisnis sering menggunakan prinsip-prinsip Machiavellian dalam manuver organisasi, perebutan kekuasaan, dan kompetisi dengan rival. Konsep-konsep seperti virtù dan fortuna dapat diterapkan pada pengambilan risiko bisnis dan adaptasi terhadap perubahan pasar.</p>
+                        <p>Dalam hubungan internasional, pemikiran Machiavelli memengaruhi teori realisme, yang dominan dalam studi hubungan internasional. Realis berargumen bahwa negara bertindak berdasarkan kepentingan nasional dan perhitungan kekuasaan, bukan berdasarkan pertimbangan moral atau ideologis.</p>
+                        <p>Contoh dari penerapan prinsip Machiavellian dalam hubungan internasional termasuk kebijakan kekuatan besar, pembentukan aliansi yang berubah-ubah berdasarkan kepentingan, dan penggunaan kekuatan militer untuk mencapai tujuan politik.</p>
+                        <p>Dalam media dan budaya populer, karakter Machiavellian sering muncul dalam film, serial TV, dan novel. Karakter-karakter seperti Frank Underwood dalam "House of Cards" dan Cersei Lannister dalam "Game of Thrones" mencontohkan tipu daya politik dan manipulasi Machiavellian.</p>
+                        <p>Pemikiran Machiavelli juga relevan untuk memahami dinamika kekuasaan dalam organisasi dan kelompok sosial. Prinsip-prinsipnya tentang persuasi, manipulasi, dan pembentukan koalisi dapat diterapkan dalam berbagai konteks, dari politik kantor hingga dinamika kelompok teman sebaya.</p>
+                        <p>Namun, penerapan prinsip Machiavellian dalam konteks modern juga menuai kritik. Banyak yang berargumen bahwa dalam masyarakat demokratis yang transparan, tindakan Machiavellian cenderung ditemukan dan dihukum, baik melalui proses hukum maupun tekanan publik.</p>
+                        <p>Selain itu, beberapa sarjana berargumen bahwa kompleksitas dunia modern memerlukan pendekatan yang lebih nuansa terhadap kekuasaan daripada yang ditawarkan oleh Machiavelli. Mereka menekanan pentingnya kolaborasi, transparansi, dan nilai-nilai etis dalam pemerintahan dan bisnis modern.</p>
+                        <p>Meskipun ada kritik ini, pemikiran Machiavelli terus memberikan wawasan berharga tentang sifat kekuasaan dan politik. Karyanya mengingatkan kita bahwa dalam dunia yang kompetitif dan tidak pasti, pemahaman tentang realitas politik yang keras seringkali diperlukan untuk bertahan dan sukses.</p>
+                    </div>
+                    <div class="content-visual">
+                        <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Relevansi Modern Machiavellianisme">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="warisan">
+            <div class="section-container">
+                <h2 class="section-title">Warisan Machiavellianisme</h2>
+                <div class="content-text">
+                    <p>Warisan Machiavelli kompleks dan multi-dimensional. Di satu sisi, namanya menjadi sinonim untuk penipuan dan ketiadaan moral dalam politik. Di sisi lain, ia diakui sebagai pemikir penting yang mengubah cara kita memahami kekuasaan dan politik.</p>
+                    <p>Kontribusi utama Machiavelli termasuk:</p>
+                    <ul>
+                        <li>Pemisahan politik dari etika dan agama</li>
+                        <li>Pendekatan empiris dan realistis terhadap studi politik</li>
+                        <li>Penekanan pada peran kepemimpinan dalam stabilitas politik</li>
+                        <li>Pengakuan terhadap pentingnya kekuatan militer dalam politik</li>
+                        <li>Pemahaman tentang hubungan antara virtù dan fortuna dalam urusan manusia</li>
+                    </ul>
+                    <p>Machiavelli mengubah cara kita memikirkan politik dengan beralih dari pertanyaan "Apa yang seharusnya dilakukan penguasa?" menjadi "Apa yang benar-benar dilakukan penguasa?" Pendekatan empirisnya terhadap politik meletakkan dasar bagi ilmu politik modern sebagai disiplin yang mempelajari kekuasaan dan governance.</p>
+                    <p>Pemikiran Machiavelli tentang republik dan kebebasan juga penting, meskipun sering diabaikan. Dalam Discourses on Livy, ia mengungkapkan preferensi untuk pemerintahan republik yang stabil di mana warga negara dapat menikmati kebebasan tertentu, asalkan mereka menjalankan kewajiban sipil mereka.</p>
+                    <p>Warisan Machiavelli juga termasuk pengaruhnya pada perkembangan negara modern. Pemikirannya tentang raison d'état dan prioritas kepentingan negara atas pertimbangan moral individu membantu membentuk konsep kedaulatan dan sistem negara-bangsa.</p>
+                    <p>Dalam bidang historiografi, Machiavelli mengembangkan pendekatan terhadap sejarah yang berfokus pada pola-pola dan pelajaran praktis. Ia melihat sejarah sebagai guru yang dapat memberikan wawasan tentang perilaku manusia dan dinamika politik, pendekatan yang memengaruhi sejarawan kemudian seperti Gibbon dan Ranke.</p>
+                    <p>Pemikiran Machiavelli juga memengaruhi perkembangan teori kekuasaan dan kepemimpinan. Konsep-konsepnya tentang virtù, fortuna, dan hubungan antara penguasa dan rakyat telah diterapkan dalam berbagai konteks, dari teori organisasi hingga studi kepemimpinan militer.</p>
+                    <p>Warisan sastra Machiavelli juga signifikan. Karyanya telah menginspirasi banyak penulis, dramawan, dan seniman, dan karakter "Machiavel" menjadi arketip dalam drama Elizabethan dan kemudian dalam budaya populer.</p>
+                    <p>Dalam pendidikan, karya Machiavelli terus diajarkan dalam kursus-kursus tentang teori politik, filsafat, sejarah, dan hubungan internasional. Pemikirannya memberikan titik awal yang berharga untuk diskusi tentang hubungan antara moralitas dan kekuasaan, dan tentang tantangan etika yang dihadapi oleh mereka yang memegang kekuasaan.</p>
+                    <p>Warisan Machiavelli juga termasuk debat yang terus berlanjut tentang makna dan signifikansi karyanya. Para sarjana terus memperdebatkan apakah Machiavelli adalah seorang guru kejahatan, seorang realis yang jujur, seorang republikan yang bersemangat, atau kombinasi dari semua ini.</p>
+                    <p>Meskipun sering disalahtafsirkan, karya Machiavelli terus dipelajari dan diperdebatkan oleh para sarjana, politisi, dan filsuf. Pemikirannya mengajarkan kita tentang kompleksitas kekuasaan dan tantangan etika yang dihadapi oleh mereka yang memegang kekuasaan.</p>
+                    <p>Sebagai penutup, mungkin yang terbaik adalah mengingat kata-kata Machiavelli sendiri: "Everyone sees what you appear to be, few experience what you really are." (Setiap orang melihat apa yang tampak dari dirimu, sedikit yang mengalami apa yang sebenarnya ada dalam dirimu).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sumber">
+            <div class="section-container">
+                <h2 class="section-title">Sumber Referensi</h2>
+                <div class="references">
+                    <h2>Referensi Akademik Machiavellianisme</h2>
+                    
+                    <div class="reference-category">
+                        <h3>Karya Asli Niccolò Machiavelli</h3>
+                        <ul class="reference-list">
+                            <li>Machiavelli, N. (1532). Il Principe (The Prince). Antonio Blado d'Asola.</li>
+                            <li>Machiavelli, N. (1531). Discorsi sopra la prima deca di Tito Livio (Discourses on Livy). Antonio Blado d'Asola.</li>
+                            <li>Machiavelli, N. (1521). Dell'arte della guerra (The Art of War).</li>
+                            <li>Machiavelli, N. (1525). Istorie fiorentine (Florentine Histories).</li>
+                            <li>Machiavelli, N. (1518). La Mandragola (The Mandrake).</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reference-category">
+                        <h3>Buku dan Monograf Akademik</h3>
+                        <ul class="reference-list">
+                            <li>Skinner, Q. (1978). The Foundations of Modern Political Thought: Volume 1, The Renaissance. Cambridge University Press.</li>
+                            <li>Strauss, L. (1958). Thoughts on Machiavelli. University of Chicago Press.</li>
+                            <li>Pocock, J. G. A. (1975). The Machiavellian Moment: Florentine Political Thought and the Atlantic Republican Tradition. Princeton University Press.</li>
+                            <li>Berlin, I. (1980). Against the Current: Essays in the History of Ideas. Viking Press.</li>
+                            <li>Viroli, M. (2000). Niccolo's Smile: A Biography of Machiavelli. Farrar, Straus and Giroux.</li>
+                            <li>Rebhorn, W. A. (1988). Foxes and Lions: Machiavelli's Confidence Men. Cornell University Press.</li>
+                            <li>Mansfield, H. C. (1996). Machiavelli's Virtue. University of Chicago Press.</li>
+                            <li>Najemy, J. M. (1993). Between Friends: Discourses of Power and Desire in the Machiavelli-Vettori Letters of 1513-1515. Princeton University Press.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reference-category">
+                        <h3>Artikel Jurnal Ilmiah</h3>
+                        <ul class="reference-list">
+                            <li>Christie, R., & Geis, F. L. (1970). Studies in Machiavellianism. Academic Press.</li>
+                            <li>Scott, J. T., & Sullivan, V. B. (1994). Patricide and the Plot of The Prince: Cesare Borgia and Machiavelli's Italy. American Political Science Review.</li>
+                            <li>Benner, E. (2009). Machiavelli's Ethics. Princeton University Press.</li>
+                            <li>McCormick, J. P. (2011). Machiavelli against Republicanism: On the Cambridge School's 'Guicciardinian Moments'. Political Theory.</li>
+                            <li>Winter, D. G. (1973). The Power Motive. Free Press.</li>
+                            <li>Fehr, B., Samsom, D., & Paulhus, D. L. (1992). The Construct of Machiavellianism: Twenty Years Later. Advances in Personality Assessment.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reference-category">
+                        <h3>Sumber Online dan Digital</h3>
+                        <ul class="reference-list">
+                            <li>Stanford Encyclopedia of Philosophy: Niccolò Machiavelli. (https://plato.stanford.edu/entries/machiavelli/)</li>
+                            <li>Internet Encyclopedia of Philosophy: Machiavelli. (https://iep.utm.edu/machiave/)</li>
+                            <li>The Machiavelli Project. (https://www.machiavelliproject.com)</li>
+                            <li>Online Library of Liberty: Machiavelli Collection. (https://oll.libertyfund.org/pages/machiavelli)</li>
+                            <li>Project Gutenberg: Works by Niccolò Machiavelli. (https://www.gutenberg.org/ebooks/author/775)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reference-category">
+                        <h3>Studi Psikologis tentang Machiavellianisme</h3>
+                        <ul class="reference-list">
+                            <li>Paulhus, D. L., & Williams, K. M. (2002). The Dark Triad of personality: Narcissism, Machiavellianism, and psychopathy. Journal of Research in Personality.</li>
+                            <li>Jones, D. N., & Paulhus, D. L. (2009). Machiavellianism. In M. R. Leary & R. H. Hoyle (Eds.), Handbook of Individual Differences in Social Behavior.</li>
+                            <li>Wilson, D. S., Near, D., & Miller, R. R. (1996). Machiavellianism: A synthesis of the evolutionary and psychological literatures. Psychological Bulletin.</li>
+                            <li>McHoskey, J. W. (1999). Machiavellianism, intrinsic versus extrinsic goals, and social interest: A self-determination theory analysis. Motivation and Emotion.</li>
+                            <li>Rauthmann, J. F., & Will, T. (2011). Proposing a multidimensional Machiavellianism conceptualization. Social Behavior and Personality.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reference-category">
+                        <h3>Kritik dan Analisis Sastra</h3>
+                        <ul class="reference-list">
+                            <li>Kahn, V. (1994). Machiavellian Rhetoric: From the Counter-Reformation to Milton. Princeton University Press.</li>
+                            <li>Pitkin, H. F. (1984). Fortune Is a Woman: Gender and Politics in the Thought of Niccolò Machiavelli. University of California Press.</li>
+                            <li>Sullivan, V. B. (1996). Machiavelli's Three Romes: Religion, Human Liberty, and Politics Reformed. Northern Illinois University Press.</li>
+                            <li>Fontana, B. (1999). Love of Country and Love of God: The Political Uses of Religion in Machiavelli. Journal of the History of Ideas.</li>
+                            <li>de Grazia, S. (1989). Machiavelli in Hell. Princeton University Press.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <footer>
+        <div class="footer-content">
+            <p class="developer-credit">Dikembangkan oleh V3XZZ (GitHub: V3XZZ) © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.fromTo(section, 
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.card').forEach(card => {
+            gsap.fromTo(card,
+                { opacity: 0, scale: 0.8 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+            
+            const backToTop = document.getElementById('backToTop');
+            if (winScroll > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        };
+
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                gsap.to(this, { y: -10, duration: 0.3 });
+            });
+            card.addEventListener('mouseleave', function() {
+                gsap.to(this, { y: 0, duration: 0.3 });
+            });
+        });
+
+        document.querySelectorAll('.reference-list li').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                gsap.to(this, { x: 5, duration: 0.3 });
+            });
+            item.addEventListener('mouseleave', function() {
+                gsap.to(this, { x: 0, duration: 0.3 });
+            });
+        });
+    </script>
+</body>
+</html>
